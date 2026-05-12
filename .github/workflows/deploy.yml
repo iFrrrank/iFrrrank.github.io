@@ -1,0 +1,58 @@
+# 工作流的名称，如果省略，则使用当前文件名
+name: Deploy to GitHub Pages
+
+# 从工作流生成的工作流运行的名称，如果省略，则使用提交时的 commit 信息
+run-name: Deploy by @${{ github.actor }}
+
+# 触发部署的条件
+on:
+  push:
+    branches:
+      - master # 每次 push 到 master 分支 就会触发 workflows
+
+# 当前流程要执行的任务，可以是多个
+jobs:
+  deploy:
+    # 任务的名称，不设置则默认 deploy
+    name: build-and-deploy
+
+    # 运行所需要的虚拟机环境
+    runs-on: ubuntu-latest
+
+    # 运行权限，默认是 read 权限，如果需要写权限请修改为 write
+    permissions:
+      contents: write # 修改为 write 权限
+      pages: write
+      id-token: write
+
+    # 每个任务下的运行步骤，短横杠 - 表示一个步骤，从上至下依次执行。
+    steps:
+      - name: 🚀 Clone 源码
+        uses: actions/checkout@v6
+
+      - name: 📥 安装 pnpm
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4
+
+      - name: 🧱 设置 Node.js 环境
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 📦 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔧 构建项目
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+        run: pnpm run build
+
+      - name: 🚀 部署到 GitHub Pages
+        # 此 actions 官方文档: https://github.com/JamesIves/github-pages-deploy-action
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          # 部署文件所在位置，必填，注意检查位置是否正确⚠️
+          FOLDER: docs/.vuepress/dist
+          # 部署的分支，默认 gh-pages
+          BRANCH: gh-pages
+          clean: true

@@ -1,0 +1,44 @@
+{
+  "name": "frankblog",
+  "description": "Frank's Blog",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm docs:dev",
+    "build": "pnpm docs:build",
+    "build:clean": "pnpm docs:build:clean",
+    "docs:build": "vuepress build docs",
+    "docs:build:clean": "rm -rf docs/.vuepress/.temp docs/.vuepress/.cache && pnpm docs:build",
+    "docs:dev": "vuepress dev docs",
+    "docs:clean-dev": "vuepress dev docs --clean-cache",
+    "lint": "pnpm lint:prettier && pnpm lint:md",
+    "lint:md": "markdownlint-cli2 '**/*.md'",
+    "lint:prettier": "prettier --check --write .",
+    "prepare": "husky",
+    "update": "pnpm dlx vp-update"
+  },
+  "dependencies": {
+    "@vuepress/bundler-vite": "2.0.0-rc.28",
+    "@vuepress/plugin-feed": "2.0.0-rc.28",
+    "husky": "^9.1.7",
+    "markdownlint-cli2": "^0.22.1",
+    "mathjax-full": "^3.2.2",
+    "nano-staged": "^1.0.2",
+    "prettier": "^3.8.3",
+    "sass-embedded": "^1.98.0",
+    "vue": "^3.5.31",
+    "vuepress": "2.0.0-rc.28",
+    "vuepress-theme-hope": "2.0.0-rc.106"
+  },
+  "devDependencies": {
+    "mermaid": "^11.15.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "packageManager": "pnpm@10.11.1"
+}
+

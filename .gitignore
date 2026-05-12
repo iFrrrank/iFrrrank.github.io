@@ -1,0 +1,38 @@
+# dependencies
+**/node_modules
+
+# misc
+.DS_Store
+npm-debug.log*
+yarn-error.log
+
+/coverage
+.idea
+.vscode
+yarn.lock
+*bak
+
+# visual studio code
+.history
+*.log
+functions/*
+.temp/**
+
+# umi
+/src/.umi
+.umi
+.umi-production
+.umi-test
+
+# screenshot
+screenshot
+.firebase
+build
+
+# VuePress Cache
+**/.vuepress/.cache/
+# VuePress Temp
+**/.vuepress/.temp/
+# VuePress Output
+dist/
+**/.vuepress/.dist/
