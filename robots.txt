@@ -1,0 +1,4 @@
+User-agent:*
+Disallow:
+
+Sitemap: https://iFrrrank.github.io/sitemap.xml
