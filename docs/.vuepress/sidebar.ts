@@ -20,6 +20,12 @@ export default sidebar({
       icon: 'book',
       prefix: 'frontend/',
       children: 'structure'
+    },
+    {
+      text: 'Transfomer',
+      icon: 'a-061-robot',
+      prefix: 'transformer/',
+      children: 'structure'
     }
   ]
 })

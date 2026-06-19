@@ -40,6 +40,9 @@ export default hopeTheme({
   metaLocales: {
     editLink: '在 GitHub 上编辑此页'
   },
+  mdEnhance: {
+    enableAll: true
+  },
   markdown: {
     align: true, // 文字居中/右对齐
     attrs: true, // 给元素加自定义属性
@@ -59,6 +62,7 @@ export default hopeTheme({
     tabs: true, // 选项卡
     tasklist: true, // 任务列表
     vPre: true, // 禁止 Vue 解析
+    footnote: true, // 脚注
     stylize: [
       {
         matcher: 'Recommended',
@@ -116,4 +120,3 @@ export default hopeTheme({
     }
   }
 })
-
