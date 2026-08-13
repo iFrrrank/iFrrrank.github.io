@@ -29,9 +29,9 @@ export default sidebar({
       children: 'structure'
     },
     {
-      text: 'Transfomer',
+      text: '数据库',
       icon: 'a-061-robot',
-      prefix: 'transformer/',
+      prefix: 'db/',
       children: 'structure'
     }
   ]
