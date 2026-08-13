@@ -24,6 +24,11 @@ export default navbar([
     icon: 'a-061-robot',
     prefix: '/transformer/',
     children: ['from-seq2seq-to-attention']
+  },
+  {
+    text: '数据库',
+    icon: 'a-061-robot',
+    prefix: '/db/',
+    children: ['MySQL']
   }
 ])
-
