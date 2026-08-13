@@ -1,5 +1,6 @@
 import { sidebar } from 'vuepress-theme-hope'
 
+// 配置导航栏
 export default sidebar({
   '/': [
     '',
@@ -26,7 +27,12 @@ export default sidebar({
       icon: 'a-061-robot',
       prefix: 'transformer/',
       children: 'structure'
+    },
+    {
+      text: 'Transfomer',
+      icon: 'a-061-robot',
+      prefix: 'transformer/',
+      children: 'structure'
     }
   ]
 })
-
