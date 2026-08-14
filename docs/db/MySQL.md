@@ -1501,7 +1501,7 @@ order by
 > SQL 连接：https://www.runoob.com/sql/sql-join.html
 > 
 
-![DQL](imgs/DQL.png)
+![DQL](./imgs/DQL.png)
 
 ### 连接查询的分类
 
@@ -3048,7 +3048,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
 
 下图是 MySQL 的一个简要架构图，从下图你可以很清晰的看到客户端的一条 SQL 语句在 MySQL 内部是如何执行的。
 
-![image.png](imgs/DDL_0.png)
+![image.png](./imgs/DDL_0.png)
 
 从上图可以看出， MySQL 主要由下面几部分构成：
 
@@ -3188,7 +3188,7 @@ MyISAM 不支持外键，而 InnoDB 支持。
 
 阿里的《Java 开发手册》也是明确规定禁止使用外键的（详见[阿里p3c-SQL](https://alibaba.github.io/p3c/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%AF%AD%E5%8F%A5.html)）。
 
-![image.png](imgs/DDL_1.png)
+![image.png](./imgs/DDL_1.png)
 
 不过，在代码中进行约束的话，对程序员的能力要求更高，具体是否要采用外键还是要根据你的项目实际情况而定。
 
@@ -3449,7 +3449,7 @@ mysql> select * from dept_bak;
 > 比如事务B读取到了事务A未提交的数据。
 > 
 
-![image.png](imgs/TCL_0.png)
+![image.png](./imgs/TCL_0.png)
 
 ##### 不可重复读
 
@@ -3457,19 +3457,19 @@ mysql> select * from dept_bak;
     
 > 事务A两次读取同一条记录，但是读取到的数据却是不一样的。
 
-![image.png](imgs/TCL_1.png)
+![image.png](./imgs/TCL_1.png)
 
 ##### 幻读
 
 - 一个事务按照条件查询数据时，没有对应的数据行，但是再插入数据时，又发现这行数据已经存在，好像出现了 "幻影"。
 
-![image.png](imgs/TCL_2.png)
+![image.png](./imgs/TCL_2.png)
 
 #### MySQL的InnoDB引擎是如何保证事务的这四大特性的？（事务是怎么做到多条 DML 语句同时成功和同时失败的呢？）
 
 而对于这四大特性，实际上分为两个部分。 其中的原子性、一致性、持久化，实际上是由InnoDB中的两份日志来保证的，一份是`redo log`日志，一份是`undo log`日志。 而隔离性是通过数据库的锁和`MVCC`来保证的。
 
-![image.png](imgs/TCL_3.png)
+![image.png](./imgs/TCL_3.png)
 
 ##### redo log
 
@@ -3481,11 +3481,11 @@ mysql> select * from dept_bak;
 
 在InnoDB引擎中的内存结构中，主要的内存区域就是缓冲池，在缓冲池中缓存了很多的数据页。 当在一个事务中，执行多个增删改的操作时，InnoDB引擎会先操作缓冲池中的数据，如果缓冲区没有对应的数据，会通过后台线程将磁盘中的数据加载出来，存放在缓冲区中，然后将缓冲池中的数据修改，修改后的数据页我们称为**脏页**。 而脏页则会在一定的时机，通过后台线程刷新到磁盘中，从而保证缓冲区与磁盘的数据一致。 而缓冲区的脏页数据并不是实时刷新的，而是一段时间之后将缓冲区的数据刷新到磁盘中，假如刷新到磁盘的过程出错了，而提示给用户事务提交成功，而数据却没有持久化下来，这就出现问题了，没有保证事务的持久性。
 
-![image.png](imgs/TCL_4.png)
+![image.png](./imgs/TCL_4.png)
 
 那么，如何解决上述的问题呢？ 在InnoDB中提供了一份日志 `redo log`，接下来我们再来分析一下，通过`redo log`如何解决这个问题。
 
-![image.png](imgs/TCL_5.png)
+![image.png](./imgs/TCL_5.png)
 
 有了`redo log`之后，当对缓冲区的数据进行增删改之后，会首先将操作的数据页的变化，记录在`redo log buffer`中。在事务提交时，会将`redo log buffer`中的数据刷新到`redo log file`中。过一段时间之后：
 
@@ -5382,15 +5382,15 @@ InnoDB的数据是基于索引组织的，**行锁是通过对索引上的索引
 
 - 行锁（Record Lock，又叫记录锁）：**锁定单个行记录的锁**，防止其他事务对此行进行update和delete。在RC、RR隔离级别下都支持。
     
-    ![image.png](imgs/DCL_1.png)
+    ![image.png](./imgs/DCL_1.png)
     
 - 间隙锁（Gap Lock）：**锁定一个范围，不包括记录本身。**锁定索引记录间隙（不含该记录），确保索引记录间隙不变，防止其他事务在这个间隙进行insert，产生幻读。在RR隔离级别下都支持。
     
-    ![image.png](imgs/DCL_2.png)
+    ![image.png](./imgs/DCL_2.png)
     
 - 临键锁（Next-Key Lock）：Record Lock+Gap Lock，**锁定一个范围，包含记录本身**，主要目的是为了解决幻读问题（MySQL 事务部分提到过）。记录锁只能锁住已经存在的记录，为了避免插入新记录，需要依赖间隙锁。。在RR隔离级别下支持。
     
-    ![image.png](imgs/DCL_3.png)
+    ![image.png](./imgs/DCL_3.png)
     
 
 
@@ -6023,7 +6023,7 @@ MySQL支持一台主库同时向多台从库进行复制， 从库同时也可�
 
 MySQL主从复制的核心就是二进制日志，具体的过程如下：
 
-![image.png](imgs/Operation_0.png)
+![image.png](./imgs/Operation_0.png)
 
 从上图来看，复制分成三步：
 
@@ -6033,7 +6033,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 
 #### 搭建
 
-![image.png](imgs/Operation_1.png)
+![image.png](./imgs/Operation_1.png)
 
 准备好两台服务器之后，在上述的两台服务器中分别安装好MySQL，并完成基础的初始化准备（安装、密码配置等操作）工作。 其中：
 
@@ -6142,11 +6142,11 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 1. IO瓶颈：热点数据太多，数据库缓存不足，产生大量磁盘IO，效率较低。 请求数据太多，带宽不够，网络IO瓶颈。
 2. CPU瓶颈：排序、分组、连接查询、聚合统计等SQL会耗费大量的CPU资源，请求数太多，CPU出现瓶颈。
 
-![image.png](imgs/Operation_2.png)
+![image.png](./imgs/Operation_2.png)
 
 为了解决上述问题，我们需要对数据库进行分库分表处理。
 
-![image.png](imgs/Operation_3.png)
+![image.png](./imgs/Operation_3.png)
 
 分库分表的核心思想都是将数据分散存储，使得单一数据库/表的数据量变小来缓解单一数据库的性能问题，从而达到提升数据库性能的目的。
 
@@ -6154,7 +6154,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 
 分库分表的形式，主要是两种：垂直拆分和水平拆分。而拆分的粒度，一般又分为分库和分表，所以组成的拆分策略最终如下：
 
-![image.png](imgs/Operation_4.png)
+![image.png](./imgs/Operation_4.png)
 
 #### 垂直拆分
 
@@ -6166,7 +6166,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 2. 每个库的数据也不一样。
 3. 所有库的并集是全量数据。
 
-![image.png](imgs/Operation_5.png)
+![image.png](./imgs/Operation_5.png)
 
 ##### 垂直分表
 
@@ -6176,7 +6176,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 2. 每个表的数据也不一样，一般通过一列（主键/外键）关联。
 3. 所有表的并集是全量数据。
 
-![image.png](imgs/Operation_6.png)
+![image.png](./imgs/Operation_6.png)
 
 #### 水平拆分
 
@@ -6188,7 +6188,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 2. 每个库的数据都不一样。
 3. 所有库的并集是全量数据。
 
-![image.png](imgs/Operation_7.png)
+![image.png](./imgs/Operation_7.png)
 
 ##### 水平分表
 
@@ -6198,7 +6198,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 2. 每个表的数据都不一样。
 3. 所有表的并集是全量数据。
 
-![image.png](imgs/Operation_8.png)
+![image.png](./imgs/Operation_8.png)
 
 > 
 > 
@@ -6214,7 +6214,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 > 1. ShardingJDBC：基于AOP原理，在应用程序中对本地执行的SQL进行拦截，解析、改写、路由处理。需要自行编码配置实现，只支持java语言，性能较高。
 > 2. MyCat：数据库分库分表中间件，不用调整代码即可实现分库分表，支持多种语言，性能不及前者。
 > 
-> ![image.png](imgs/Operation_9.png)
+> ![image.png](./imgs/Operation_9.png)
 > 
 
 ### MyCat
@@ -6225,11 +6225,11 @@ MyCathttp://www.mycat.org.cn/downloads是开源的、活跃的、基于Java语�
 
 开发人员只需要连接MyCat即可，而具体底层用到几台数据库，每一台数据库服务器里面存储了什么数据，都无需关心。 具体的分库分表的策略，只需要在MyCat中配置即可。
 
-![image.png](imgs/Operation_10.png)
+![image.png](./imgs/Operation_10.png)
 
 在MyCat的整体结构中，分为两个部分：上面的逻辑结构、下面的物理结构。
 
-![image.png](imgs/Operation_11.png)
+![image.png](./imgs/Operation_11.png)
 
 在MyCat的逻辑结构主要负责逻辑库、逻辑表、分片规则、分片节点等逻辑结构的处理，而具体的数据存储还是在物理结构，也就是数据库服务器中存储的。
 
@@ -6244,7 +6244,7 @@ MyCat是采用Java语言开发的开源的数据库中间件，支持Windows和L
 
 #### 原理
 
-![image.png](imgs/Operation_12.png)
+![image.png](./imgs/Operation_12.png)
 
 在MyCat中，当执行一条SQL语句时，MyCat需要进行SQL解析、分片分析、路由分析、读写分离分析等操作，最终经过一系列的分析决定将当前的SQL语句到底路由到那几个（或哪一个）节点数据库，数据库将数据执行完毕后，如果有返回的结果，则将结果返回给MyCat，最终还需要在MyCat中进行结果合并、聚合处理、排序处理、分页处理等操作，最终再将结果返回给客户端。
 
@@ -6363,7 +6363,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 `rule.xml`中定义所有拆分表的规则，在使用过程中可以灵活的使用分片算法，或者对同一个分片算法使用不同的参数，它让分片过程可配置化。主要包含两类标签：`tableRule`、`Function`。
 
-![image.png](imgs/Operation_13.png)
+![image.png](./imgs/Operation_13.png)
 
 ##### server.xml
 
@@ -6373,7 +6373,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
     
     主要配置MyCat中的系统配置信息，对应的系统配置项及其含义，如下：
     
-    ![image.png](imgs/Operation_14.png)
+    ![image.png](./imgs/Operation_14.png)
     
     | 属性 | 取值 | 含义 |
     | --- | --- | --- |
@@ -6417,7 +6417,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
     配置MyCat中的用户、访问密码，以及用户针对于逻辑库、逻辑表的权限信息，具体的权限描述方式及配置说明如下：
     
 
-![image.png](imgs/Operation_15.png)
+![image.png](./imgs/Operation_15.png)
 
 > 
 > 
@@ -6452,7 +6452,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 根据指定的字段及其配置的范围与数据节点的对应情况， 来决定该数据属于哪一个分片。
 
-![image.png](imgs/Operation_16.png)
+![image.png](./imgs/Operation_16.png)
 
 - **schema.xml配置**
     
@@ -6511,7 +6511,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 根据指定的字段值与节点数量进行求模运算，根据运算结果， 来决定该数据属于哪一个分片。
 
-![image.png](imgs/Operation_17.png)
+![image.png](./imgs/Operation_17.png)
 
 - **schema.xml配置**
     
@@ -6556,7 +6556,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 所谓一致性哈希，相同的哈希因子计算值总是被划分到相同的分区表中，不会因为分区节点的增加而改变原来数据的分区位置，有效的解决了分布式数据的拓容问题。
 
-![image.png](imgs/Operation_18.png)
+![image.png](./imgs/Operation_18.png)
 
 - **schema.xml配置**
     
@@ -6605,7 +6605,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 该算法类似于十进制的求模运算，但是为二进制的操作。例如，取 id 的二进制低 10 位 与1111111111 进行位 & 运算，位与运算最小值为 0000000000，最大值为1111111111，转换为十
 进制，也就是位于0-1023之间。
 
-![image.png](imgs/Operation_19.png)
+![image.png](./imgs/Operation_19.png)
 
 特点：
 
@@ -6658,14 +6658,14 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
     > 以上`rule.xml`配置分为三个分区：0-255，256-511，512-1023
     > 
     > 
-    > ![image.png](imgs/Operation_20.png)
+    > ![image.png](./imgs/Operation_20.png)
     > 
 
 ##### 字符串hash解析算法
 
 截取字符串中的指定位置的子字符串，进行hash算法，算出分片。
 
-![image.png](imgs/Operation_21.png)
+![image.png](./imgs/Operation_21.png)
 
 - **schema.xml配置**
     
@@ -6707,14 +6707,14 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
     | `partitionLength` | 分片范围列表 |
     | `hashSlice` | hash运算位，根据子字符串的hash运算。0 代表 `str.length()`；-1 代表 `str.length() - 1`；大于0只代表数字自身。可以理解为`substring(start, end)`，start为0则只表示0 |
     
-    ![image.png](imgs/Operation_22.png)
+    ![image.png](./imgs/Operation_22.png)
     
 
 ##### 枚举分片
 
 通过在配置文件中配置可能的枚举值，指定数据分布到不同数据节点上，本规则适用于按照省份、性别、状态拆分数据等业务 。
 
-![image.png](imgs/Operation_23.png)
+![image.png](./imgs/Operation_23.png)
 
 - **schema.xml配置**
     
@@ -6776,7 +6776,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 运行阶段由应用自主决定路由到那个分片，直接根据字符子串（必须是数字）计算分片号。
 
-![image.png](imgs/Operation_24.png)
+![image.png](./imgs/Operation_24.png)
 
 - **schema.xml配置**
     
@@ -6832,7 +6832,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 按照日期及对应的时间周期来分片。
 
-![image.png](imgs/Operation_25.png)
+![image.png](./imgs/Operation_25.png)
 
 - **schema.xml配置**
     
@@ -6885,7 +6885,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 使用场景为按照月份来分片，每个自然月为一个分片。
 
-![image.png](imgs/Operation_26.png)
+![image.png](./imgs/Operation_26.png)
 
 - **schema.xml配置**
     
@@ -6938,13 +6938,13 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
 通过MyCat即可轻易实现上述功能，不仅可以支持MySQL，也可以支持Oracle和SQL Server。
 
-![image.png](imgs/Operation_27.png)
+![image.png](./imgs/Operation_27.png)
 
 #### 一主一从
 
 MySQL的主从复制，是基于二进制日志（binlog）实现的。
 
-![image.png](imgs/Operation_28.png)
+![image.png](./imgs/Operation_28.png)
 
 > 
 > 
@@ -6969,7 +6969,7 @@ MySQL的主从复制，是基于二进制日志（binlog）实现的。
     
     上述配置的具体关联对应情况如下：
     
-    ![image.png](imgs/Operation_29.png)
+    ![image.png](./imgs/Operation_29.png)
     
     `writeHost`代表的是写操作对应的数据库，`readHost`代表的是读操作对应的数据库。 所以要想实现读写分离，就得配置`writeHost`关联的是主库，`readHost`关联的是从库。
     而仅仅配置好了`writeHost`以及`readHost`还不能完成读写分离，还需要配置一个非常重要的负责均衡的参数 `balance`，取值有4种，具体含义如下：
@@ -7006,7 +7006,7 @@ MySQL的主从复制，是基于二进制日志（binlog）实现的。
 一个主机 Master1 用于处理所有写请求，它的从机 Slave1 和另一台主机 Master2 还有它的从机 Slave2 负责所有读请求。当 Master1 主机宕机后，Master2 主机负责写请求，Master1 、
 Master2 互为备机。架构图如下：
 
-![image.png](imgs/Operation_30.png)
+![image.png](./imgs/Operation_30.png)
 
 MyCat控制后台数据库的读写分离和负载均衡由`schema.xml`文件`datahost`标签的`balance`属性控制，通过`writeType`及`switchType`来完成失败自动切换的。
 
@@ -7036,7 +7036,7 @@ MyCat控制后台数据库的读写分离和负载均衡由`schema.xml`文件`da
     
     具体的对应情况如下：
     
-    ![image.png](imgs/Operation_31.png)
+    ![image.png](./imgs/Operation_31.png)
     
     | 属性名 | 含义 |
     | --- | --- |
