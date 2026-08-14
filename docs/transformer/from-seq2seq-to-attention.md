@@ -35,6 +35,8 @@ Seq2Seq 模型架构由编码器（Encoder）和解码器（Decoder）两部分�
 
 可以参考 [jalammar](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-Seq2Seq-models-with-attention/) 制作的动画对 Seq2Seq 处理文本/长文本序列有一个清晰的认识。
 
+<video src="/videos/Seq2Seq.mp4" controls width="100%"></video>
+
 我们用数学语言来更精确地还原这个过程。以机器翻译为例，假设序列输入是一个句子，这个句子由$n$个单词组成：$sentence = {w_1, w_2,...,w_n}$
 
 1. **词向量映射**：首先，RNN 将句子中的每一个单词通过一个嵌入层（Word Embedding）映射成为一个向量得到一个向量序列：$X = {x_1, x_2,...,x_n}$。
@@ -91,6 +93,8 @@ Attention 机制与经典的 Seq2Seq 模型主要有两点不同：
 ::: warning 注意
 今天我们不关注 Attention 内部实现的细节，只是简单了解大致的作用，以及其与 Seq2Seq 的区别。 
 :::
+
+<video src="/videos/Mechanics_of_Seq2Seq_Models_With_Attention.mp4" controls width="100%"></video>
 
 1. 由于编码器中每个 hidden state（隐藏层状态）都对应到输入句子中一个单词，那么**解码器要查看所有接收到的编码器的 hidden state**（隐藏层状态）。
 2. 给每个 hidden state（隐藏层状态）计算出一个分数（我们先忽略这个分数的计算过程）。
