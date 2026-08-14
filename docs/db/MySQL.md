@@ -3186,7 +3186,7 @@ MyISAM 不支持外键，而 InnoDB 支持。
 
 外键对于维护数据一致性非常有帮助，但是对性能有一定的损耗。因此，通常情况下，我们是不建议在实际生产项目中使用外键的，在业务代码中进行约束即可！
 
-阿里的《Java 开发手册》也是明确规定禁止使用外键的。
+阿里的《Java 开发手册》也是明确规定禁止使用外键的（详见[阿里p3c-SQL](https://alibaba.github.io/p3c/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%AF%AD%E5%8F%A5.html)）。
 
 ![image.png](imgs/DDL_1.png)
 
