@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "pnpm docs:dev",
+    "dev": "set NODE_OPTIONS=--max_old_space_size=8192 && pnpm docs:dev",
     "build": "pnpm docs:build",
     "build:clean": "pnpm docs:build:clean",
     "docs:build": "vuepress build docs",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@mathjax/src": "^4.1.2",
+    "cross-env": "^10.1.0",
     "mermaid": "^11.15.0"
   },
   "pnpm": {

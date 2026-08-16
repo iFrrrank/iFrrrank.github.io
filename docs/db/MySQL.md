@@ -93,7 +93,7 @@
 - 查询用户：`select * from MySQL.user;`
     
     ```sql
-    其中Host代表当前用户访问的主机, **如果为localhost, 仅代表只能够在当前本机访问，是不可以远程访问的；如果是主机名用%通配，表示可以在任意主机访问该数据库。** User代表的是访问该数据库的用户名。在MySQL中需要通过Host和User来唯一标识一个用户。
+    -- 其中Host代表当前用户访问的主机, 如果为localhost, 仅代表只能够在当前本机访问，是不可以远程访问的；如果是主机名用%通配，表示可以在任意主机访问该数据库。User代表的是访问该数据库的用户名。在MySQL中需要通过Host和User来唯一标识一个用户。
     +-----------+---------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+-----------------------+-------------------+----------------+
     | Host      | User          | Select_priv | Insert_priv | Update_priv | Delete_priv | Create_priv | Drop_priv | Reload_priv | Shutdown_priv | Process_priv | File_priv | Grant_priv | References_priv | Index_priv | Alter_priv | Show_db_priv | Super_priv | Create_tmp_table_priv | Lock_tables_priv | Execute_priv | Repl_slave_priv | Repl_client_priv | Create_view_priv | Show_view_priv | Create_routine_priv | Alter_routine_priv | Create_user_priv | Event_priv | Trigger_priv | Create_tablespace_priv | ssl_type | ssl_cipher | x509_issuer | x509_subject | max_questions | max_updates | max_connections | max_user_connections | plugin                | authentication_string                     | password_expired | password_last_changed | password_lifetime | account_locked |
     +-----------+---------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-----------------------+-------------------------------------------+------------------+-----------------------+-------------------+----------------+
@@ -119,12 +119,12 @@
 
 - 导出数据：
     ```sql
-    ## 整个数据库的所有表都导出
-    ## 注意：不要进入到MySQL>MySQLdump bjpowernode>D:\bjpowernode.sql -uroot -p数据库密码
-    ## 进入C:\Program Files\MySQL\MySQL Server 5.7\bin>即可
-    MySQLdump bjpowernode>D:\bjpowernode.sql -uroot -p
+    -- 整个数据库的所有表都导出
+    -- 注意：不要进入到MySQL>MySQLdump bjpowernode>D:\bjpowernode.sql -uroot -p数据库密码
+    -- 进入C:\Program Files\MySQL\MySQL Server 5.7\bin>即可
+    MySQLdump bjpowernode > D:\bjpowernode.sql -uroot -p
 
-    ## 只导出某个表
+    -- 只导出某个表
     MySQLdump bjpowernode emp>D:\bjpowernode.sql -uroot -p
     ```
 
@@ -148,115 +148,47 @@ where
 ##### = 等于
 
 ```sql
-## 查询薪资等于 800 的员工姓名和编号？
+-- 查询薪资等于 800 的员工姓名和编号？
 select empno,ename from emp where sal = 800;
-+-------+-------+
-| empno | ename |
-+-------+-------+
-|  7369 | SMITH |
-+-------+-------+
 
-## 查询 SMITH 的编号和薪资？
-select empno,sal from emp where ename = 'SMITH'; **//字符串使用单引号**
-+-------+--------+
-| empno | sal    |
-+-------+--------+
-|  7369 | 800.00 |
-+-------+--------+
+-- 查询 SMITH 的编号和薪资？
+select empno,sal from emp where ename = 'SMITH'; **-- 字符串使用单引号**
 ```
 
 ##### <>或!= 不等于
 
 ```sql
-## 查询薪资不等于 800 的员工姓名和编号？
+-- 查询薪资不等于 800 的员工姓名和编号？
 select empno,ename from emp where sal != 800;
-select empno,ename from emp where sal <> 800; // 小于号和大于号组成不等号
-+-------+--------+
-| empno | ename  |
-+-------+--------+
-|  7499 | ALLEN  |
-|  7521 | WARD   |
-|  7566 | JONES  |
-|  7654 | MARTIN |
-|  7698 | BLAKE  |
-|  7782 | CLARK  |
-|  7788 | SCOTT  |
-|  7839 | KING   |
-|  7844 | TURNER |
-|  7876 | ADAMS  |
-|  7900 | JAMES  |
-|  7902 | FORD   |
-|  7934 | MILLER |
-+-------+--------+
+select empno,ename from emp where sal <> 800; -- 小于号和大于号组成不等号
 ```
 
 ##### < 小于
 
 ```sql
-## 查询薪资小于 2000 的员工姓名和编号？
+-- 查询薪资小于 2000 的员工姓名和编号？
 select empno,ename,sal from emp where sal < 2000;
-+-------+--------+---------+
-| empno | ename  | sal     |
-+-------+--------+---------+
-|  7369 | SMITH  |  800.00 |
-|  7499 | ALLEN  | 1600.00 |
-|  7521 | WARD   | 1250.00 |
-|  7654 | MARTIN | 1250.00 |
-|  7844 | TURNER | 1500.00 |
-|  7876 | ADAMS  | 1100.00 |
-|  7900 | JAMES  |  950.00 |
-|  7934 | MILLER | 1300.00 |
-+-------+--------+---------+
 ```
 
 ##### <= 小于等于
 
 ```sql
-## 查询薪资小于等于 3000 的员工姓名和编号？
+--  查询薪资小于等于 3000 的员工姓名和编号？
 select empno,ename,sal from emp where sal <= 3000;
-+-------+--------+---------+
-| empno | ename  | sal     |
-+-------+--------+---------+
-|  7369 | SMITH  |  800.00 |
-|  7499 | ALLEN  | 1600.00 |
-|  7521 | WARD   | 1250.00 |
-|  7566 | JONES  | 2975.00 |
-|  7654 | MARTIN | 1250.00 |
-|  7698 | BLAKE  | 2850.00 |
-|  7782 | CLARK  | 2450.00 |
-|  7788 | SCOTT  | 3000.00 |
-|  7844 | TURNER | 1500.00 |
-|  7876 | ADAMS  | 1100.00 |
-|  7900 | JAMES  |  950.00 |
-|  7902 | FORD   | 3000.00 |
-|  7934 | MILLER | 1300.00 |
-+-------+--------+---------+
 ```
 
 ##### > 大于
 
 ```sql
-## 查询薪资大于 3000 的员工姓名和编号？
+-- 查询薪资大于 3000 的员工姓名和编号？
 select empno,ename,sal from emp where sal > 3000;
-+-------+-------+---------+
-| empno | ename | sal     |
-+-------+-------+---------+
-|  7839 | KING  | 5000.00 |
-+-------+-------+---------+
 ```
 
 ##### >= 大于等于
 
 ```sql
-## 查询薪资大于等于 3000 的员工姓名和编号？
+-- 查询薪资大于等于 3000 的员工姓名和编号？
 select empno,ename,sal from emp where sal >= 3000;
-+-------+-------+---------+
-| empno | ename | sal     |
-+-------+-------+---------+
-|  7788 | SCOTT | 3000.00 |
-|  7839 | KING  | 5000.00 |
-|  7902 | FORD  | 3000.00 |
-+-------+-------+---------+
 ```
 
 ##### between … and …. 两个值之间，等同于 >= and <=
@@ -264,32 +196,14 @@ select empno,ename,sal from emp where sal >= 3000;
 - >= and <=（and 是并且的意思）
 
 ```sql
-## 查询薪资在 2450 和 3000 之间的员工信息？包括 2450 和 3000
+--  查询薪资在 2450 和 3000 之间的员工信息？包括 2450 和 3000
 select empno,ename,sal from emp where sal >= 2450 and sal <= 3000;
-+-------+-------+---------+
-| empno | ename | sal     |
-+-------+-------+---------+
-|  7566 | JONES | 2975.00 |
-|  7698 | BLAKE | 2850.00 |
-|  7782 | CLARK | 2450.00 |
-|  7788 | SCOTT | 3000.00 |
-|  7902 | FORD  | 3000.00 |
-+-------+-------+---------+
 ```
 
 - 第二种方式：between … and …
 
 ```sql
 select empno,ename,sal from emp where sal between 2450 and 3000;
-+-------+-------+---------+
-| empno | ename | sal     |
-+-------+-------+---------+
-|  7566 | JONES | 2975.00 |
-|  7698 | BLAKE | 2850.00 |
-|  7782 | CLARK | 2450.00 |
-|  7788 | SCOTT | 3000.00 |
-|  7902 | FORD  | 3000.00 |
-+-------+-------+---------+
 ```
 
 💡 注意：使用 `between and` 的时候，必须遵循**左小右大**。`between and` 是**闭区间，包括两端的值**。
@@ -297,25 +211,11 @@ select empno,ename,sal from emp where sal between 2450 and 3000;
 ##### is null 为空（is not null 不为空）
 
 ```sql
-## 查询哪些员工的津贴/补助为 null？
-select empno,ename,sal,comm from emp where comm = null;  // 错误的SQL语句
+-- 查询哪些员工的津贴/补助为 null？
+select empno,ename,sal,comm from emp where comm = null;  -- 错误的SQL语句
 Empty set (0.00 sec)
 
 select empno,ename,sal,comm from emp where comm is null;
-+-------+--------+---------+------+
-| empno | ename  | sal     | comm |
-+-------+--------+---------+------+
-|  7369 | SMITH  |  800.00 | NULL |
-|  7566 | JONES  | 2975.00 | NULL |
-|  7698 | BLAKE  | 2850.00 | NULL |
-|  7782 | CLARK  | 2450.00 | NULL |
-|  7788 | SCOTT  | 3000.00 | NULL |
-|  7839 | KING   | 5000.00 | NULL |
-|  7876 | ADAMS  | 1100.00 | NULL |
-|  7900 | JAMES  |  950.00 | NULL |
-|  7902 | FORD   | 3000.00 | NULL |
-|  7934 | MILLER | 1300.00 | NULL |
-+-------+--------+---------+------+
 ```
 
 💡 注意：**在数据库当中 `null` 不能使用等号进行衡量。需要使用 `is null` 。因为数据库中的 `null` 代表什么也没有，它不是一个值，所以不能使用等号衡量。**
@@ -323,107 +223,46 @@ select empno,ename,sal,comm from emp where comm is null;
 ##### and 并且
 
 ```sql
-## 查询工作岗位是 MANAGER 并且工资大于 2500 的员工信息？
+-- 查询工作岗位是 MANAGER 并且工资大于 2500 的员工信息？
 select empno,ename,job,sal from  emp where job = 'MANAGER' and sal > 2500;
-+-------+-------+---------+---------+
-| empno | ename | job     | sal     |
-+-------+-------+---------+---------+
-|  7566 | JONES | MANAGER | 2975.00 |
-|  7698 | BLAKE | MANAGER | 2850.00 |
-+-------+-------+---------+---------+
 ```
 
 ##### or 或者
 
 ```sql
-## 查询工作岗位是 MANAGER 和 SALESMAN 的员工？
+-- 查询工作岗位是 MANAGER 和 SALESMAN 的员工？
 select empno,ename,job from emp where job = 'MANAGER' or job = 'SALESMAN';
-+-------+--------+----------+
-| empno | ename  | job      |
-+-------+--------+----------+
-|  7499 | ALLEN  | SALESMAN |
-|  7521 | WARD   | SALESMAN |
-|  7566 | JONES  | MANAGER  |
-|  7654 | MARTIN | SALESMAN |
-|  7698 | BLAKE  | MANAGER  |
-|  7782 | CLARK  | MANAGER  |
-|  7844 | TURNER | SALESMAN |
-+-------+--------+----------+
 ```
 
 > **and 和 or 同时出现的话，有优先级问题吗？**
-> 
-> 
 > ```sql
-> ## 查询工资大于 2500，并且部门编号为 10 或 20 部门的员工？
+> -- 查询工资大于 2500，并且部门编号为 10 或 20 部门的员工？
 > select * from emp where sal > 2500 and deptno = 10 or deptno = 20;
-> +-------+-------+-----------+------+------------+---------+------+--------+
-> | EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
-> +-------+-------+-----------+------+------------+---------+------+--------+
-> |  7369 | SMITH | CLERK     | 7902 | 1980-12-17 |  800.00 | NULL |     20 |
-> |  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
-> |  7788 | SCOTT | ANALYST   | 7566 | 1987-04-19 | 3000.00 | NULL |     20 |
-> |  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
-> |  7876 | ADAMS | CLERK     | 7788 | 1987-05-23 | 1100.00 | NULL |     20 |
-> |  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
-> +-------+-------+-----------+------+------------+---------+------+--------+
 > ```
+>
+> - 分析以上语句的问题？
+> **and 优先级比 or 高，以上语句会先执行 and，然后执行 or。**
 > 
-
-> 分析以上语句的问题？
-           **and 优先级比 or 高，以上语句会先执行 and，然后执行 or。**
-以上这个语句表示什么含义？
-           找出工资大于 2500 并且部门编号为 10 的员工，或者 20 部门所有员工找出来。
-> 
-
-> 解决问题：
-> 
-> 
+> - 以上这个语句表示什么含义？
+> 找出工资大于 2500 并且部门编号为 10 的员工，或者 20 部门所有员工找出来。
+>
+> - 解决问题：
 > ```sql
 > select * from emp where sal > 2500 and (deptno = 10 or deptno = 20);
-> +-------+-------+-----------+------+------------+---------+------+--------+
-> | EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
-> +-------+-------+-----------+------+------------+---------+------+--------+
-> |  7566 | JONES | MANAGER   | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
-> |  7788 | SCOTT | ANALYST   | 7566 | 1987-04-19 | 3000.00 | NULL |     20 |
-> |  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
-> |  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000.00 | NULL |     20 |
-> +-------+-------+-----------+------+------------+---------+------+--------+
-> ```
+> ``` 
 > 
-> 
-> 💡 **and 和 or 同时出现，and 优先级较高。如果想让 or 先执行，需要加“小括号”。**以后在开发中，如果不确定优先级，就加小括号就行了。
-> 
-> 
-> 
+> 💡 and 和 or 同时出现，and 优先级较高。如果想让 or 先执行，需要加“小括号”。以后在开发中，如果不确定优先级，就加小括号就行了。
 
 ##### in 包含（不是在某个区间），相当于多个 or （not in 不在这个范围中）
 
 ```sql
-## 查询工作岗位是 MANAGER 和 SALESMAN 的员工？
+-- 查询工作岗位是 MANAGER 和 SALESMAN 的员工？
 select empno,ename,job from emp where job = 'MANAGER' or job = 'SALESMAN';
-select empno,ename,job from emp where job **in('MANAGER', 'SALESMAN');**
-+-------+--------+----------+
-| empno | ename  | job      |
-+-------+--------+----------+
-|  7499 | ALLEN  | SALESMAN |
-|  7521 | WARD   | SALESMAN |
-|  7566 | JONES  | MANAGER  |
-|  7654 | MARTIN | SALESMAN |
-|  7698 | BLAKE  | MANAGER  |
-|  7782 | CLARK  | MANAGER  |
-|  7844 | TURNER | SALESMAN |
-+-------+--------+----------+
+select empno,ename,job from emp where job in('MANAGER', 'SALESMAN');
 
-## 查询薪资是 800 和 5000 的员工信息？
+-- 查询薪资是 800 和 5000 的员工信息？
 select ename,sal from emp where sal = 800 or sal = 5000;
-select ename,sal from emp where sal in(800, 5000); //这个不是表示800到5000都找出来。
-+-------+---------+
-| ename | sal     |
-+-------+---------+
-| SMITH |  800.00 |
-| KING  | 5000.00 |
-+-------+---------+
+select ename,sal from emp where sal in(800, 5000); --  这个不是表示 800 到 5000 都找出来。
 ```
 
 💡 注意：`in` 不是一个区间，`in` 后面跟的是具体的值。
@@ -443,61 +282,24 @@ like称为模糊查询，支持`%`或`下划线匹配`，`%`是一个特殊的�
 `_`：匹配任意一个字符**
 
 ```sql
-## 找出名字中含有 O 的？
+-- 找出名字中含有 O 的？
 select ename from emp where ename like '%O%';
-+-------+
-| ename |
-+-------+
-| JONES |
-| SCOTT |
-| FORD  |
-+-------+
 
-## 找出名字以 T 结尾的？
+-- 找出名字以 T 结尾的？
 select ename from emp where ename like '%T';
-+-------+
-| ename |
-+-------+
-| SCOTT |
-+-------+
 
-## 找出名字以 K 开始的？
+-- 找出名字以 K 开始的？
 select ename from emp where ename like 'K%';
-+-------+
-| ename |
-+-------+
-| KING  |
-+-------+
 
-## 找出第二个字每是 A 的？
+-- 找出第二个字每是 A 的？
 select ename from emp where ename like '_A%';
-+--------+
-| ename  |
-+--------+
-| WARD   |
-| MARTIN |
-| JAMES  |
-+--------+
 
-## 找出第三个字母是 R 的？
+-- 找出第三个字母是 R 的？
 select ename from emp where ename like '__R%';
-+--------+
-| ename  |
-+--------+
-| WARD   |
-| MARTIN |
-| TURNER |
-| FORD   |
-+--------+
 
-## 找出名字中有“_”的？
-select name from t_student where name like '%_%'; //这样不行。
-select name from t_student where name like '%\_%'; **// \转义字符。**
-+----------+
-| name     |
-+----------+
-| jack_son |
-+----------+
+-- 找出名字中有“_”的？
+select name from t_student where name like '%_%'; -- 这样不行。
+select name from t_student where name like '%\_%'; -- \转义字符。
 ```
 
 ### 排序
@@ -505,26 +307,8 @@ select name from t_student where name like '%\_%'; **// \转义字符。**
 #### 升序
 
 ```sql
-## 按照工资升序，找出员工名和薪资？
+-- 按照工资升序，找出员工名和薪资？
 select ename,sal from emp order by sal;
-+--------+---------+
-| ename  | sal     |
-+--------+---------+
-| SMITH  |  800.00 |
-| JAMES  |  950.00 |
-| ADAMS  | 1100.00 |
-| WARD   | 1250.00 |
-| MARTIN | 1250.00 |
-| MILLER | 1300.00 |
-| TURNER | 1500.00 |
-| ALLEN  | 1600.00 |
-| CLARK  | 2450.00 |
-| BLAKE  | 2850.00 |
-| JONES  | 2975.00 |
-| SCOTT  | 3000.00 |
-| FORD   | 3000.00 |
-| KING   | 5000.00 |
-+--------+---------+
 ```
 
 > 注意：**默认是升序**。
@@ -532,49 +316,23 @@ select ename,sal from emp order by sal;
 > 
 
 ```sql
-select ename , sal from emp order by sal; // 升序
-select ename , sal from emp order by sal asc; // 升序
-select ename , sal from emp order by sal desc; // 降序。
+select ename , sal from emp order by sal; -- 升序
+select ename , sal from emp order by sal asc; -- 升序
+select ename , sal from emp order by sal desc; -- 降序。
 ```
 
 #### 降序
 
 ```sql
-## 按照工资的降序排列，当工资相同的时候再按照名字的升序排列。
-select ename,sal from emp order by sal desc, ename asc;
-+--------+---------+
-| ename  | sal     |
-+--------+---------+
-| KING   | 5000.00 |
-| FORD   | 3000.00 |
-| SCOTT  | 3000.00 |
-| JONES  | 2975.00 |
-| BLAKE  | 2850.00 |
-| CLARK  | 2450.00 |
-| ALLEN  | 1600.00 |
-| TURNER | 1500.00 |
-| MILLER | 1300.00 |
-| MARTIN | 1250.00 |
-| WARD   | 1250.00 |
-| ADAMS  | 1100.00 |
-| JAMES  |  950.00 |
-| SMITH  |  800.00 |
-+--------+---------+
+-- 按照工资的降序排列，当工资相同的时候再按照名字的升序排列。
+select ename, sal from emp order by sal desc, ename asc;
 ```
 
 💡 **注意：越靠前的字段越能起到主导作用。只有当前面的字段无法完成排序的时候，才会启用后面的字段。**
 
 ```sql
-## 找出工作岗位是SALESMAN的员工，并且要求按照薪资的降序排列。
-select ename,job,sal from emp where job = 'SALESMAN' order by sal desc;
-+--------+----------+---------+
-| ename  | job      | sal     |
-+--------+----------+---------+
-| ALLEN  | SALESMAN | 1600.00 |
-| TURNER | SALESMAN | 1500.00 |
-| WARD   | SALESMAN | 1250.00 |
-| MARTIN | SALESMAN | 1250.00 |
-+--------+----------+---------+
+--  找出工作岗位是SALESMAN的员工，并且要求按照薪资的降序排列。
+select ename, job, sal from emp where job = 'SALESMAN' order by sal desc;
 ```
 
 ### 数据处理函数（单行处理函数）
@@ -587,38 +345,12 @@ select ename,job,sal from emp where job = 'SALESMAN' order by sal desc;
 
 ```sql
 select lower(ename) as ename from emp;
-+--------+
-| ename  |
-+--------+
-| smith  |
-| allen  |
-| ward   |
-| jones  |
-| martin |
-| blake  |
-| clark  |
-| scott  |
-| king   |
-| turner |
-| adams  |
-| james  |
-| ford   |
-| miller |
-+--------+
 ```
 
 #### upper 转换大写
 
 ```sql
 select upper(name) as name from t_student;
-+----------+
-| name     |
-+----------+
-| ZHANGSAN |
-| LISI     |
-| WANGWU   |
-| JACK_SON |
-+----------+
 ```
 
 #### substr 取子串
@@ -627,108 +359,31 @@ select upper(name) as name from t_student;
 
 ```sql
 select substr(ename, 1, 1) as ename from emp;
-+-------+
-| ename |
-+-------+
-| S     |
-| A     |
-| W     |
-| J     |
-| M     |
-| B     |
-| C     |
-| S     |
-| K     |
-| T     |
-| A     |
-| J     |
-| F     |
-| M     |
-+-------+
 ```
 
 > **注意：起始下标从 1 开始，没有 0.**
-> 
-> 
 > ```sql
-> ## 找出员工名字第一个字母是 A 的员工信息？
-> ## 第一种方式：模糊查询
+> -- 找出员工名字第一个字母是 A 的员工信息？
+> -- 第一种方式：模糊查询
 > select ename from emp where ename like 'A%';
-> +-------+
-> | ename |
-> +-------+
-> | ALLEN |
-> | ADAMS |
-> +-------+
 > 
-> ## 第二种方式：substr 函数
-> select ename from emp where substr(ename,1,1) = 'A';
-> +-------+
-> | ename |
-> +-------+
-> | ALLEN |
-> | ADAMS |
-> +-------+
-> 
-> ##### 首字母大写**
-> select **concat(upper(substr(name,1,1)),substr(name,2,length(name) - 1))** as result from t_student;
-> +----------+
-> | result   |
-> +----------+
-> | Zhangsan |
-> | Lisi     |
-> | Wangwu   |
-> | Jack_son |
-> +----------+
+> -- 第二种方式：substr 函数
+> select ename from emp where substr(ename, 1, 1) = 'A';
 > ```
-> 
 
 #### concat 字符串的拼接
 
 ```sql
-select concat(empno,ename) from emp;
-+---------------------+
-| concat(empno,ename) |
-+---------------------+
-| 7369SMITH           |
-| 7499ALLEN           |
-| 7521WARD            |
-| 7566JONES           |
-| 7654MARTIN          |
-| 7698BLAKE           |
-| 7782CLARK           |
-| 7788SCOTT           |
-| 7839KING            |
-| 7844TURNER          |
-| 7876ADAMS           |
-| 7900JAMES           |
-| 7902FORD            |
-| 7934MILLER          |
-+---------------------+
+select concat(empno, ename) from emp;
+
+-- 首字母大写
+select concat(upper(substr(name, 1, 1)), substr(name, 2, length(name) - 1)) as result from t_student;
 ```
 
 #### length 取长度
 
 ```sql
 select length(ename) enamelength from emp;
-+-------------+
-| enamelength |
-+-------------+
-|           5 |
-|           5 |
-|           4 |
-|           5 |
-|           6 |
-|           5 |
-|           5 |
-|           5 |
-|           4 |
-|           6 |
-|           5 |
-|           5 |
-|           4 |
-|           6 |
-+-------------+
 ```
 
 #### trim 去空格
@@ -738,11 +393,6 @@ select * from emp where ename = '  KING';
 Empty set (0.00 sec)
 
 select * from emp where ename = trim('   KING');
-+-------+-------+-----------+------+------------+---------+------+--------+
-| EMPNO | ENAME | JOB       | MGR  | HIREDATE   | SAL     | COMM | DEPTNO |
-+-------+-------+-----------+------+------------+---------+------+--------+
-|  7839 | KING  | PRESIDENT | NULL | 1981-11-17 | 5000.00 | NULL |     10 |
-+-------+-------+-----------+------+------------+---------+------+--------+
 ```
 
 #### str_to_date将字符串 varchar 类型转换成 date 类型
@@ -754,13 +404,13 @@ drop table if exists t_user;
 create table t_user(
     id int,
     name varchar(32),
-    birth date    // 生日也可以使用date日期类型
+    birth date    -- 生日也可以使用date日期类型
 );
 ```
 
 ```sql
-## 插入数据
-insert into t_user(id,name,birth) values(1, 'zhangsan', **'01-10-1990'**); // 1990 年 10 月 1 日
+--  插入数据
+insert into t_user(id,name,birth) values(1, 'zhangsan', **'01-10-1990'**); -- 1990 年 10 月 1 日
 ERROR 1292 (22007): Incorrect date value: '01-10-1990' for column 'birth' at row 1
 
 【出问题了】：原因是类型不匹配。数据库 birth 是 date 类型，这里给了一个字符串 varchar。
@@ -797,22 +447,12 @@ Query OK, 1 row affected (0.00 sec)
 语法格式：**`date_format(日期类型数据, '日期格式')`**
 
 ```sql
-## 查询的时候可以以某个特定的日期格式展示吗？可以
-select id,name,date_format(birth, '%m/%d/%Y') as birth from t_user;
-+------+------+------------+
-| id   | name | birth      |
-+------+------+------------+
-|    2 | lisi | 10/01/1990 |
-+------+------+------------+
+--  查询的时候可以以某个特定的日期格式展示吗？可以
+select id,name, date_format(birth, '%m/%d/%Y') as birth from t_user;
 ```
 
 ```sql
-select id,name,birth from t_user;
-+------+------+------------+
-| id   | name | birth      |
-+------+------+------------+
-|    2 | lisi | 1990-10-01 |
-+------+------+------------+
+select id,name, birth from t_user;
 ```
 
 以上的 SQL 语句实际上是进行了**默认**的日期格式化，**自动**将数据库中的 date 类型转换成 varchar 类型。并且采用的格式是 mysql 默认的日期格式：**`'%Y-%m-%d'`**
@@ -840,19 +480,15 @@ create table t_user(
 #### case..when..then..when..then..else..end
 
 ```sql
-## 当员工的工作岗位是 MANAGER 的时候，工资上调 10%，当工作岗位是 SALESMAN 的时候，工资上调 50%, 其它正常。
-## 注意：不修改数据库，只是将查询结果显示为工资上调
-select
-    ename,
-    job,
-    sal as oldsal,
+--  当员工的工作岗位是 MANAGER 的时候，工资上调 10%，当工作岗位是 SALESMAN 的时候，工资上调 50%，其它正常。
+-- 注意：不修改数据库，只是将查询结果显示为工资上调
+select ename, job, sal as oldsal,
     (case job
         when 'MANAGER' then sal*1.1 
         when 'SALESMAN' then sal*1.5 
         else sal 
     end) as newsal
-from
-    emp;
+from emp;
 +--------+-----------+---------+---------+
 | ename  | job       | oldsal  | newsal  |
 +--------+-----------+---------+---------+
@@ -878,8 +514,8 @@ from
 语法格式：`format (数字, '格式')`
 
 ```sql
-## 薪资设置千分位
-select ename,**format(sal, '$999,999')** as sal from emp;
+--  薪资设置千分位
+select ename, format(sal, '$999,999') as sal from emp;
 +--------+-------+
 | ename  | sal   |
 +--------+-------+
@@ -903,7 +539,7 @@ select ename,**format(sal, '$999,999')** as sal from emp;
 #### round 四舍五入
 
 ```sql
-select 'abc' from emp; // select后面直接跟“字面量/字面值”
+select 'abc' from emp; -- select后面直接跟“字面量/字面值”
 +-----+
 | abc |
 +-----+
@@ -931,7 +567,7 @@ ERROR 1054 (42S22): Unknown column 'abc' in 'field list'
 
 
 ```sql
-select round(1236.567, 0) as result from emp; //保留整数位。
+select round(1236.567, 0) as result from emp; -- 保留整数位。
 +--------+
 | result |
 +--------+
@@ -951,7 +587,7 @@ select round(1236.567, 0) as result from emp; //保留整数位。
 |   1237 |
 +--------+
 
-select round(1236.567, 1) as result from emp; //保留1个小数
+select round(1236.567, 1) as result from emp; -- 保留1个小数
 +--------+
 | result |
 +--------+
@@ -971,7 +607,7 @@ select round(1236.567, 1) as result from emp; //保留1个小数
 | 1236.6 |
 +--------+
 
-select round(1236.567, 2) as result from emp; //保留2个小数
+select round(1236.567, 2) as result from emp; -- 保留2个小数
 +---------+
 | result  |
 +---------+
@@ -991,7 +627,7 @@ select round(1236.567, 2) as result from emp; //保留2个小数
 | 1236.57 |
 +---------+
 
-select round(1236.567, -1) as result from emp; // 保留到十位。
+select round(1236.567, -1) as result from emp; -- 保留到十位。
 +--------+
 | result |
 +--------+
@@ -1015,7 +651,7 @@ select round(1236.567, -1) as result from emp; // 保留到十位。
 #### rand() 生成随机数
 
 ```sql
-select round(rand()*100,0) from emp; // 100以内的随机数
+select round(rand()*100, 0) from emp; -- 100以内的随机数
 +---------------------+
 | round(rand()*100,0) |
 +---------------------+
@@ -1073,7 +709,7 @@ ifnull 函数用法：**`ifnull(数据, 被当做哪个值)`**
 补助为 NULL 的时候，将补助当做 0
 
 ```sql
-## 计算每个员工的年薪？年薪 = (月薪 + 月补助) * 12
+--  计算每个员工的年薪？年薪 = (月薪 + 月补助) * 12
 select ename, (sal + ifnull(comm, 0)) * 12 as yearsal from emp;
 +--------+----------+
 | ename  | yearsal  |
@@ -1106,7 +742,7 @@ select ename, (sal + ifnull(comm, 0)) * 12 as yearsal from emp;
 ##### sum求和
 
 ```sql
-## 找出工资总和？
+--  找出工资总和？
 select sum(sal) from emp;
 +----------+
 | sum(sal) |
@@ -1118,7 +754,7 @@ select sum(sal) from emp;
 ##### avg 平均值
 
 ```sql
-## 找出平均工资？
+--  找出平均工资？
 select avg(sal) from emp;
 +-------------+
 | avg(sal)    |
@@ -1130,7 +766,7 @@ select avg(sal) from emp;
 ##### max 最大值
 
 ```sql
-## 找出最高工资？
+--  找出最高工资？
 select max(sal) from emp;
 +----------+
 | max(sal) |
@@ -1142,7 +778,7 @@ select max(sal) from emp;
 ##### min最小值
 
 ```sql
-## 找出最低工资？
+--  找出最低工资？
 select min(sal) from emp;
 +----------+
 | min(sal) |
@@ -1154,7 +790,7 @@ select min(sal) from emp;
 ##### count 计数
 
 ```sql
-## 找出总人数？
+--  找出总人数？
 select count(*) from emp;
 +----------+
 | count(*) |
@@ -1176,7 +812,7 @@ select sum(comm) from emp;
 |   2200.00 |
 +-----------+
 
-select sum(comm) from emp where comm is not null; // 不需要额外添加这个过滤条件。sum函数自动忽略NULL。
+select sum(comm) from emp where comm is not null; -- 不需要额外添加这个过滤条件。sum函数自动忽略NULL。
 ```
 
 ##### 分组函数中 count()和 count(具体字段)有什么区别？
@@ -1210,20 +846,21 @@ count(*)：统计表当中的总行数。（只要有一行数据， count 则++
 ##### 分组函数不能够直接使用在 where 子句中！！！！！
 
 ```sql
-## 找出比最低工资高的员工信息
+--  找出比最低工资高的员工信息
 select ename,sal from emp where sal > min(sal);
 ERROR 1111 (HY000): Invalid use of group function
-
+```
+::: warning
 思考以上的错误信息：无效的使用了分组函数？
 原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where子句当中。
 怎么解释？
-**因为group by是在where执行之后才会执行的。**
-```
+**因为`group by`是在`where`执行之后才会执行的。**
+:::
 
 ##### 所有的分组函数可以组合起来一起用
 
 ```sql
-select sum(sal),min(sal),max(sal),avg(sal),count(*)* from emp;
+select sum(sal), min(sal), max(sal), avg(sal), count(*)* from emp;
 **+----------+----------+----------+-------------+----------+
 | sum(sal) | min(sal) | max(sal) | avg(sal)    | count()  |
 +----------+----------+----------+-------------+----------+
@@ -1260,27 +897,27 @@ group by
 order by
 	...
 
-## 执行顺序
+执行顺序
 1. from
 2. where
 3. group by
 4. select
 5. order by
 
-为什么分组函数不能直接使用在 where 后面？
-select ename,sal from emp where sal > min(sal);//报错。
-因为分组函数在使用的时候必须先分组之后才能使用。where 执行的时候，还没有分组。所以 where 后面不能出现分组函数。
+-- 为什么分组函数不能直接使用在 where 后面？
+select ename,sal from emp where sal > min(sal); -- 报错。
+-- 因为分组函数在使用的时候必须先分组之后才能使用。where 执行的时候，还没有分组。所以 where 后面不能出现分组函数。
 
 select sum(sal) from emp;
-这个没有分组，为啥 sum()函数可以用呢？因为 select 在 group by 之后执行。
+-- 这个没有分组，为什么 sum() 函数可以用呢？因为 select 在 group by 之后执行。
 ```
 
 #### 实例
 
 ```sql
-## 计算每个岗位的工资和？
-## 实现思路：按照工作岗位分组，然后对工资求和。
-select job,sum(sal) from emp group by job;
+--  计算每个岗位的工资和？
+-- 实现思路：按照工作岗位分组，然后对工资求和。
+select job, sum(sal) from emp group by job;
 +-----------+----------+
 | job       | sum(sal) |
 +-----------+----------+
@@ -1291,7 +928,7 @@ select job,sum(sal) from emp group by job;
 | SALESMAN  |  5600.00 |
 +-----------+----------+
 
-select ename,job,sum(sal) from emp group by job;
+select ename, job, sum(sal) from emp group by job;
 +-------+-----------+----------+
 | ename | job       | sum(sal) |
 +-------+-----------+----------+
@@ -1304,8 +941,8 @@ select ename,job,sum(sal) from emp group by job;
 以上语句在 mysql 中可以执行，但是毫无意义。以上语句在 oracle 中执行报错（**因为group by job 只有5个分组，只是取得第一个是此分组的名字**）。
 oracle 的语法比 mysql 的语法严格。（mysql 的语法相对来说松散一些！）
 
-## 找出每个部门的最高薪资
-## 实现思路是什么？按照部门编号分组，求每一组的最大值。
+-- 找出每个部门的最高薪资
+-- 实现思路是什么？按照部门编号分组，求每一组的最大值。
 select deptno,max(sal) from emp group by deptno;
 +--------+----------+
 | deptno | max(sal) |
@@ -1315,14 +952,14 @@ select deptno,max(sal) from emp group by deptno;
 |     30 |  2850.00 |
 +--------+----------+
 
-## 找出“每个部门，不同工作岗位”的最高薪资？
-### 技巧：两个字段联合成 1 个字段看。（两个字段联合分组）**
+-- 找出“每个部门，不同工作岗位”的最高薪资？
+-- 技巧：两个字段联合成 1 个字段看。（两个字段联合分组）**
 select
-		deptno, job, max(sal)
+    deptno, job, max(sal)
 from
-		emp
+    emp
 group by
-		deptno, job;
+    deptno, job;
 +--------+-----------+----------+
 | deptno | job       | max(sal) |
 +--------+-----------+----------+
@@ -1338,50 +975,54 @@ group by
 +--------+-----------+----------+
 ```
 
-💡 在一条 select 语句当中，**如果有 group by 语句的话，select 后面只能跟：参加分组的字段，以及分组函数。**其它的一律不能跟。
+::: tip
+💡 在一条 `select` 语句当中，**如果有 `group by` 语句的话，`select` 后面只能跟：参加分组的字段，以及分组函数。**其它的一律不能跟。
+:::
 
 ### having
 
 使用 `having` 可以对分完组之后的数据进一步过滤。**`having 不能代替 where；having 不能单独使用，having 必须和 group by 联合使用。`**
 
 ```sql
-## 找出每个部门最高薪资，要求显示最高薪资大于 3000 的？
-第一步：找出每个部门最高薪资，按照部门编号分组，求每一组最大值。
-select deptno,max(sal) from emp group by deptno;
-第二步：要求显示最高薪资大于 3000
-select deptno,max(sal) from emp group by deptno having max(sal) > 3000;
+--  找出每个部门最高薪资，要求显示最高薪资大于 3000 的？
+-- 第一步：找出每个部门最高薪资，按照部门编号分组，求每一组最大值。
+select deptno, max(sal) from emp group by deptno;
+
+-- 第二步：要求显示最高薪资大于 3000
+select deptno, max(sal) from emp group by deptno having max(sal) > 3000;
 +--------+----------+
 | deptno | max(sal) |
 +--------+----------+
 |     10 |  5000.00 |
 +--------+----------+
-思考一个问题：以上的 sql 语句执行效率是不是低？
-比较低，实际上可以这样考虑：先将大于 3000 的都找出来，然后再分组。
+-- 思考一个问题：以上的 sql 语句执行效率是不是低？
+-- 比较低，实际上可以这样考虑：先将大于 3000 的都找出来，然后再分组。
 
-select deptno,max(sal) from emp where sal > 3000 group by deptno;
+select deptno, max(sal) from emp where sal > 3000 group by deptno;
 +--------+----------+
 | deptno | max(sal) |
 +--------+----------+
 |     10 |  5000.00 |
 +--------+----------+
 ```
-
+::: tip 总结
 💡 where和having的区别：
 
 1. 执行时机不同：where是分组之前进行过滤，不满足where条件，不参与分组；而having是分组之后对结果进行过滤。
 2. 判断条件不同：where不能对聚合函数进行判断，而having可以。
 
 优化策略：where 和 having，优先选择 where，where 实在完成不了了，再选择 having。
-
+:::
 
 > where 没办法实现的SQL语句：找出每个部门平均薪资，要求显示平均薪资高于 2500 的
 > 
 
 ```sql
-第一步：找出每个部门平均薪资
+-- 第一步：找出每个部门平均薪资
 select deptno,avg(sal) from emp group by deptno;
-第二步：要求显示平均薪资高于 2500 
-select deptno,avg(sal) from emp group by deptno having avg(sal) > 2500;  // 因为where之后不能跟分组函数，而having之后可以接分组函数。
+
+-- 第二步：要求显示平均薪资高于 2500 
+select deptno, avg(sal) from emp group by deptno having avg(sal) > 2500;  -- 因为where之后不能跟分组函数，而having之后可以接分组函数。
 +--------+-------------+
 | deptno | avg(sal)    |
 +--------+-------------+
@@ -1394,7 +1035,7 @@ select deptno,avg(sal) from emp group by deptno having avg(sal) > 2500;  // 因�
 distinct关键字去除重复记录。
 
 ```sql
-## 查看一个有哪几种种岗位？
+--  查看一个有哪几种种岗位？
 select distinct job from emp; 
 +-----------+
 | job       |
@@ -1406,11 +1047,11 @@ select distinct job from emp;
 | PRESIDENT |
 +-----------+
 
-select ename,distinct job from emp;
+select ename, distinct job from emp;
 以上的sql语句是错误的。
 **记住：distinct只能出现在所有字段的最前面。**
 
-select distinct deptno,job from emp;
+select distinct deptno, job from emp;
 +--------+-----------+
 | deptno | job       |
 +--------+-----------+
@@ -1469,7 +1110,7 @@ limit
 从某张表中查询数据，先经过 where 条件筛选出有价值的数据。对这些有价值的数据进行分组 group by。分组之后可以使用 having 继续筛选。select 查询出来。最后排序输出 order by！
 
 ```sql
-## 找出每个岗位的平均薪资，要求显示平均薪资大于 1500 的，除 MANAGER 岗位之外的，最后要求按照平均薪资降序排。
+--  找出每个岗位的平均薪资，要求显示平均薪资大于 1500 的，除 MANAGER 岗位之外的，最后要求按照平均薪资降序排。
 select 
     job,avg(sal) 
 from 
@@ -1498,7 +1139,7 @@ order by
 
 `emp` 表和 `dept` 表联合起来查询数据，从`emp` 表中取员工名字，从 `dept` 表中取部门名字。这种跨表查询，多张表联合起来查询数据，被称为**连接查询**。
 
-> SQL 连接：https://www.runoob.com/sql/sql-join.html
+> SQL 连接：https:-- www.runoob.com/sql/sql-join.html
 > 
 
 ![DQL](./imgs/DQL.png)
@@ -1524,7 +1165,7 @@ order by
 ### 为什么需要连接查询（当两张表进行连接查询时，没有任何条件的限制会发生什么现象？）
 
 ```sql
-## 案例：查询每个员工所在部门名称？
+--  案例：查询每个员工所在部门名称？
 select ename,dname from emp, dept;
 +--------+------------+
 | ename  | dname      |
@@ -1546,7 +1187,7 @@ select ename,dname from emp, dept;
 连接时加条件，满足这个条件的记录被筛选出来！
 
 ```sql
-## 原始方式：不知道ename是emp表还是dept表（dname同理）
+--  原始方式：不知道ename是emp表还是dept表（dname同理）
 select 
 	ename,dname 
 from 
@@ -1560,7 +1201,7 @@ select
 from
 	emp, dept
 where
-	emp.deptno = dept.deptno; // 表起别名。很重要，效率问题。
+	emp.deptno = dept.deptno; -- 表起别名。很重要，效率问题。
 
 ## SQL92 语法
 select 
@@ -1599,25 +1240,25 @@ where
 #### 等值连接
 
 ```sql
-## 案例：查询每个员工所在部门名称，显示员工名和部门名?
+--  案例：查询每个员工所在部门名称，显示员工名和部门名?
 ## 思路：emp e 和 dept d 表进行连接。条件是：e.deptno = d.deptno
 ## SQL92 语法：
 select 
-	e.ename,d.dname 
+    e.ename,d.dname 
 from 
-	emp e, dept d 
-where 
-	e.deptno = d.deptno;
+    emp e, dept d 
+where
+    e.deptno = d.deptno;
 
 ## SQL99语法
 select
-	e.ename,d.dname
+    e.ename, d.dname
 from
-	emp e
-(inner) join     //join之前还可以有inner，inner可以省略（带着inner可读性更好！！！一眼就能看出来是内连接）
-	dept d
+    emp e
+(inner) join     -- join之前还可以有inner，inner可以省略（带着inner可读性更好！！！一眼就能看出来是内连接）
+    dept d
 on
-	e.deptno = d.deptno;   // **条件是等量关系，所以被称为等值连接**。
+    e.deptno = d.deptno;   -- 条件是等量关系，所以被称为等值连接。
 +--------+------------+
 | ename  | dname      |
 +--------+------------+
@@ -1645,15 +1286,15 @@ SQL99 的优点：表连接的条件是独立的，连接之后，如果还需�
 #### 非等值连接
 
 ```sql
-## 案例：找出每个员工的薪资等级，要求显示员工名、薪资、薪资等级？
+--  案例：找出每个员工的薪资等级，要求显示员工名、薪资、薪资等级？
 select
-	e.ename, e.sal, s.grade
+    e.ename, e.sal, s.grade
 from
-	emp e
+    emp e
 join
-	salgrade s
+    salgrade s
 on
-	e.sal between s.losal and s.hisal; // **条件不是一个等量关系，称为非等值连接**。
+    e.sal between s.losal and s.hisal; -- 条件不是一个等量关系，称为非等值连接。
 +--------+---------+-------+
 | ename  | sal     | grade |
 +--------+---------+-------+
@@ -1679,8 +1320,8 @@ on
 💡 解释：自己和自己连接。本质：将一个表看成两张表
 
 ```sql
-## 案例：查询员工的上级领导，要求显示员工名和对应的领导名？
-select empno,ename,mgr from emp;
+--  案例：查询员工的上级领导，要求显示员工名和对应的领导名？
+select empno, ename, mgr from emp;
 +-------+--------+------+
 | empno | ename  | mgr  |
 +-------+--------+------+
@@ -1704,13 +1345,13 @@ select empno,ename,mgr from emp;
 emp a 员工表
 emp b 领导表
 select
-	a.ename as '员工名', b.ename as '领导名'
+    a.ename as '员工名', b.ename as '领导名'
 from
-	emp a
+    emp a
 join
-	emp b
+    emp b
 on
-	a.mgr = b.empno; // 员工的领导编号 = 领导的员工编号
+    a.mgr = b.empno; -- 员工的领导编号 = 领导的员工编号
 +--------+--------+
 | 员工名 | 领导名 |
 +--------+--------+
@@ -1751,15 +1392,15 @@ on
 #### 左外连接（左连接）
 
 ```sql
-## 找出每个员工的上级领导？（所有员工必须全部查询出来。）
+--  找出每个员工的上级领导？（所有员工必须全部查询出来。）
 select 
-	a.ename '员工', b.ename '领导'
+    a.ename '员工', b.ename '领导'
 from
-	emp a
-left outer join    // outer可以省略，加上可读性更强
-	emp b
+    emp a
+left outer join    -- outer可以省略，加上可读性更强
+    emp b
 on
-	a.mgr = b.empno;
+    a.mgr = b.empno;
 +--------+-------+
 | 员工   | 领导  |
 +--------+-------+
@@ -1771,7 +1412,7 @@ on
 | BLAKE  | KING  |
 | CLARK  | KING  |
 | SCOTT  | JONES |
-| KING   | **NULL**  |
+| KING   | NULL  |
 | TURNER | BLAKE |
 | ADAMS  | SCOTT |
 | JAMES  | BLAKE |
@@ -1783,15 +1424,15 @@ on
 #### 右外连接（右连接）
 
 ```sql
-## 找出每个员工的上级领导？（所有员工必须全部查询出来。）
+--  找出每个员工的上级领导？（所有员工必须全部查询出来。）
 select 
-	a.ename '员工', b.ename '领导'
+    a.ename '员工', b.ename '领导'
 from
-	emp b
+    emp b
 right join
-	emp a
+    emp a
 on
-	a.mgr = b.empno;
+    a.mgr = b.empno;
 +--------+-------+
 | 员工   | 领导  |
 +--------+-------+
@@ -1826,30 +1467,30 @@ on
 
 ```sql
 select
-	...
+    ...
 from
-	**a**
+    a
 join
-	b
+    b
 on
-	a 和 b 的连接条件
+    a 和 b 的连接条件
 join
-	c
+    c
 on
-	a 和 c 的连接条件
+    a 和 c 的连接条件
 join
-	d
+    d
 on
-	a 和 d 的连接条件
+    a 和 d 的连接条件
 ```
 
 > 注意：一条 SQL 中内连接和外连接可以混合，都可以出现！
 > 
 
 ```sql
-## 案例：找出每个员工的部门名称以及工资等级，要求显示员工名、部门名、薪资、薪资等级？
+--  案例：找出每个员工的部门名称以及工资等级，要求显示员工名、部门名、薪资、薪资等级？
 select * from emp;
-+-------+--------+-----------+------+------------+---------+---------+--------+    //e表
++-------+--------+-----------+------+------------+---------+---------+--------+    -- e表
 | EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
 +-------+--------+-----------+------+------------+---------+---------+--------+
 |  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
@@ -1869,7 +1510,7 @@ select * from emp;
 +-------+--------+-----------+------+------------+---------+---------+--------+  
 
 select * from dept;
-+--------+------------+----------+  //d表
++--------+------------+----------+  -- d表
 | DEPTNO | DNAME      | LOC      |
 +--------+------------+----------+
 |     10 | ACCOUNTING | NEW YORK |
@@ -1879,7 +1520,7 @@ select * from dept;
 +--------+------------+----------+
 
 select * from salgrade;
-+-------+-------+-------+  //s表
++-------+-------+-------+  -- s表
 | GRADE | LOSAL | HISAL | 
 +-------+-------+-------+
 |     1 |   700 |  1200 |
@@ -1889,18 +1530,18 @@ select * from salgrade;
 |     5 |  3001 |  9999 |
 +-------+-------+-------+
 
-select 
-	e.ename, d.deptno, e.sal, s.grade
-from 
-	emp e
-join 
-	dept d
-on 
-	e.deptno = d.deptno
-join 
-	salgrade s
-on 
-	e.sal between s.losal and s.hisal;
+select
+    e.ename, d.deptno, e.sal, s.grade
+from
+    emp e
+join
+    dept d
+on
+    e.deptno = d.deptno
+join
+    salgrade s
+on
+    e.sal between s.losal and s.hisal;
 +--------+--------+---------+-------+
 | ename  | deptno | sal     | grade |
 +--------+--------+---------+-------+
@@ -1975,16 +1616,16 @@ where
 ##### where 子句中的子查询
 
 ```sql
-## 案例：找出比最低工资高的员工姓名和工资？
-## 实现思路：
-第一步：查询最低工资是多少
+--  案例：找出比最低工资高的员工姓名和工资？
+-- 实现思路：
+-- 第一步：查询最低工资是多少
 select min(sal) from emp;
 
-第二步：找出 > 800 的
+-- 第二步：找出 > 800 的
 select ename,sal from emp where sal > 800;
 
-第三步：合并
-select ename,sal from emp where sal > (select min(sal) from emp);
+-- 第三步：合并
+select ename, sal from emp where sal > (select min(sal) from emp);
 +--------+---------+
 | ename  | sal     |
 +--------+---------+
@@ -2009,10 +1650,10 @@ select ename,sal from emp where sal > (select min(sal) from emp);
 💡 注意：`from` 后面的子查询，可以将子查询的查询结果当做一张临时表。（技巧）
 
 ```sql
-## 案例：找出每个岗位的平均工资的薪资等级。
-## 实现思路：
-第一步：找出每个岗位的平均工资（按照岗位分组求平均值）
-select job,avg(sal) from emp group by job;
+--  案例：找出每个岗位的平均工资的薪资等级。
+-- 实现思路：
+-- 第一步：找出每个岗位的平均工资（按照岗位分组求平均值）
+select job, avg(sal) from emp group by job;
 +-----------+-------------+
 | job       | avg(sal)    |
 +-----------+-------------+
@@ -2023,15 +1664,15 @@ select job,avg(sal) from emp group by job;
 | SALESMAN  | 1400.000000 |
 +-----------+-------------+
 
-第二步：克服心理障碍，把以上的查询结果就当做一张真实存在的表t。
+-- 第二步：克服心理障碍，把以上的查询结果就当做一张真实存在的表t。
 select
 	t.*, s.grade
 from
-	(select job,**avg(sal) as avgsal** from emp group by job) t
+	(select job, avg(sal) as avgsal from emp group by job) t
 join
 	salgrade s
 on
-	t.avgsal between s.losal and s.hisal;    //必须要将avg(sal) as avgsal，否则使用t.sal,将会报错：因为t表实质上不存在，更不用说sal字段了
+	t.avgsal between s.losal and s.hisal;    -- 必须要将avg(sal) as avgsal，否则使用t.sal,将会报错：因为t表实质上不存在，更不用说sal字段了
 +-----------+-------------+-------+
 | job       | avgsal      | grade |
 +-----------+-------------+-------+
@@ -2046,7 +1687,7 @@ on
 ##### select 后面出现的子查询
 
 ```sql
-## 案例：找出每个员工的部门名称，要求显示员工名，部门名？
+--  案例：找出每个员工的部门名称，要求显示员工名，部门名？
 select
 	e.ename,e.deptno,(select d.dname from dept d where e.deptno = d.deptno) as dname
 from
@@ -2077,7 +1718,7 @@ from
 ### union 合并查询结果集
 
 ```sql
-## 案例：查询工作岗位是 MANAGER 和 SALESMAN 的员工？
+--  案例：查询工作岗位是 MANAGER 和 SALESMAN 的员工？
 ## 之前的方式
 select ename,job from emp where job = 'MANAGER' or job = 'SALESMAN';
 select ename,job from emp where job in ('MANAGER','SALESMAN');
@@ -2115,11 +1756,11 @@ a 连接 c 一个结果：10 * 10 --> 100 次
 #### union 使用时注意事项
 
 ```sql
-//错误的：union在进行结果集合并的时候，要求两个结果集的列数相同。
+-- 错误的：union在进行结果集合并的时候，要求两个结果集的列数相同。
 select ename,job from emp where job = 'MANAGER'
 union
 select ename from emp where job = 'SALESMAN';
-// MYSQL可以，oracle语法严格，不可以，报错。oracle要求：结果集合并时列和列的数据类型也要一致。
+-- MYSQL可以，oracle语法严格，不可以，报错。oracle要求：结果集合并时列和列的数据类型也要一致。
 select ename,**job** from emp where job = 'MANAGER'
 union
 select ename,**sal** from emp where job = 'SALESMAN';
@@ -2151,14 +1792,14 @@ select ename,**sal** from emp where job = 'SALESMAN';
 缺省用法：limit 5; 这是取前 5.
 
 ```sql
-## 按照薪资降序，取出排名在前 5 名的员工？
+--  按照薪资降序，取出排名在前 5 名的员工？
 select
 	ename,sal
 from
 	emp
 order by
 	sal desc
-limit 5; //取前5
+limit 5; -- 取前5
 
 select
 	ename,sal
@@ -2166,7 +1807,7 @@ from
 	emp
 order by
 	sal desc
-limit 0,5; //下标从0开始，取前5
+limit 0,5; -- 下标从0开始，取前5
 +-------+---------+
 | ename | sal     |
 +-------+---------+
@@ -2181,14 +1822,14 @@ limit 0,5; //下标从0开始，取前5
 #### 实例
 
 ```sql
-## 取出工资排名在 [3-5] 名的员工？
+--  取出工资排名在 [3-5] 名的员工？
 select
 	ename,sal
 from
 	emp
 order by
 	sal desc
-limit 2, 3; // 2 表示起始位置从下标 2 开始，就是第三条记录。// 3 表示长度。
+limit 2, 3; -- 2 表示起始位置从下标 2 开始，就是第三条记录。-- 3 表示长度。
 +-------+---------+
 | ename | sal     |
 +-------+---------+
@@ -2312,7 +1953,7 @@ insert 语句中的 “字段名” 可以省略，`insert into 表名(字段名
 语法格式：`format (数字, '格式')`
 
 ```sql
-## 薪资设置千分位
+--  薪资设置千分位
 select ename,format(sal, '$999,999') as sal from emp;
 +--------+-------+
 | ename  | sal   |
@@ -2343,13 +1984,13 @@ drop table if exists t_user;
 create table t_user(
 		id int,
 		name varchar(32),
-		birth date    // 生日也可以使用date日期类型
+		birth date    -- 生日也可以使用date日期类型
 );
 ```
 
 ```sql
-## 插入数据
-insert into t_user(id,name,birth) values(1, 'zhangsan', '01-10-1990'); // 1990 年 10 月 1 日
+--  插入数据
+insert into t_user(id,name,birth) values(1, 'zhangsan', '01-10-1990'); -- 1990 年 10 月 1 日
 ERROR 1292 (22007): Incorrect date value: '01-10-1990' for column 'birth' at row 1
 
 【出问题了】：原因是类型不匹配。数据库 birth 是 date 类型，这里给了一个字符串 varchar。
@@ -2386,7 +2027,7 @@ Query OK, 1 row affected (0.00 sec)
 语法格式：**`date_format(日期类型数据, '日期格式')`**
 
 ```sql
-## 查询的时候可以以某个特定的日期格式展示吗？
+--  查询的时候可以以某个特定的日期格式展示吗？
 select id,name,date_format(birth, '%m/%d/%Y') as birth from t_user;
 +------+------+------------+
 | id   | name | birth      |
@@ -2479,7 +2120,7 @@ select * from dept_bak;
 |     40 | OPERATIONS | BOSTON   |
 +--------+------------+----------+
 
-insert into dept_bak select * from dept; //很少用！
+insert into dept_bak select * from dept; -- 很少用！
 select * from dept_bak;
 +--------+------------+----------+
 | DEPTNO | DNAME      | LOC      |
@@ -2500,7 +2141,7 @@ select * from dept_bak;
 #### 语法格式
 
 ```sql
-## 语法格式：
+--  语法格式：
 update 表名 set 字段名1=值1,字段名2=值2,字段名3=值3, ... where 条件;
 ```
 
@@ -2538,7 +2179,7 @@ update t_user set name = 'jack', birth = '2000-10-11', create_time = now() where
 > 
 
 ```sql
-## 更新所有数据
+--  更新所有数据
 update t_user set name = 'abc';
 +------+------+------------+---------------------+
 | id   | name | birth      | create_time         |
@@ -2553,7 +2194,7 @@ update t_user set name = 'abc';
 #### 语法格式
 
 ```sql
-## 语法格式
+--  语法格式
 delete **from** 表名 where 条件;
 ```
 
@@ -2570,7 +2211,7 @@ insert into t_user(id) values(2);
 > 
 
 ```sql
-delete from t_user; // 删除所有！
+delete from t_user; -- 删除所有！
 ```
 
 #### delete 与 drop 的区别
@@ -2579,8 +2220,8 @@ delete from t_user; // 删除所有！
 - drop不仅将表中的所有数据全部清除，并且删除表的结构！
     
     ```sql
-    drop table t_student; // 当这张表不存在的时候会报错！
-    drop table if exists t_student;  // 如果这张表存在的话，删除
+    drop table t_student; -- 当这张表不存在的时候会报错！
+    drop table if exists t_student;  -- 如果这张表存在的话，删除
     ```
     
 
@@ -2627,7 +2268,7 @@ create table 表名(
 
 
 
-表名：建议以 `t_` 或者 `tbl_` 开始，可读性强。见名知意。
+表名：建议以`t_`或者`tbl_`开始，可读性强。见名知意。
 
 字段名：见名知意。表名和字段名都属于标识符。
 
@@ -2761,7 +2402,7 @@ insert into t_vip(id) values(4);
 |    1 | zhangsan | zhangsan@123.com |
 |    2 | lisi     | lisi@123.com     |
 |    3 | wangwu   | wangwu@123.com   |
-|    4 | NULL     | NULL             |   //name 字段虽然被 unique 约束了，但是可以为 NULL。
+|    4 | NULL     | NULL             |   -- name 字段虽然被 unique 约束了，但是可以为 NULL。
 +------+----------+------------------+
 ```
 
@@ -2771,7 +2412,7 @@ insert into t_vip(id) values(4);
 drop table if exists t_vip;
 create table t_vip(
 		id int,
-		name varchar(255) unique,  // 约束直接添加到列后面的，叫做列级约束。
+		name varchar(255) unique,  -- 约束直接添加到列后面的，叫做列级约束。
 		email varchar(255) unique
 );
 ```
@@ -2786,13 +2427,13 @@ create table t_vip(
 		id int,
 		name varchar(255),
 		email varchar(255),
-		**unique(name,email)** // 约束没有添加在列的后面，这种约束被称为表级约束。
+		**unique(name,email)** -- 约束没有添加在列的后面，这种约束被称为表级约束。
 );
 insert into t_vip(id,name,email) values(1,'zhangsan','zhangsan@123.com');
 insert into t_vip(id,name,email) values(2,'zhangsan','zhangsan@sina.com');
 select * from t_vip;
 
-insert into t_vip(id,name,email) values(3,'zhangsan','zhangsan@sina.com');    //name 和 email 两个字段联合起来唯一！！！
+insert into t_vip(id,name,email) values(3,'zhangsan','zhangsan@sina.com');    -- name 和 email 两个字段联合起来唯一！！！
 ERROR 1062 (23000): Duplicate entry 'zhangsan-zhangsan@sina.com' for key 'name'
 ```
 
@@ -2818,8 +2459,8 @@ MySQL> desc t_vip;
 **在MySQL当中，如果一个字段同时被not null和unique约束的话，该字段自动变成主键字段。**（注意：oracle中不一样！）
  
 insert into t_vip(id,name) values(1,'zhangsan');
-insert into t_vip(id,name) values(2,'zhangsan'); //错误了：name不能重复
-insert into t_vip(id) values(2); //错误了：name不能为NULL。
+insert into t_vip(id,name) values(2,'zhangsan'); -- 错误了：name不能重复
+insert into t_vip(id) values(2); -- 错误了：name不能为NULL。
 ```
 
 ##### 主键约束（primary key，简称 PK）
@@ -2841,13 +2482,13 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
         
         ```sql
         drop table if exists t_vip;
-        // 1个字段做主键，叫做：**单一主键**
-        ## 第一种写法：字段后面跟primary key
+        -- 1个字段做主键，叫做：**单一主键**
+        -- 第一种写法：字段后面跟primary key
         create table t_vip(
-        		**id int primary key**,  // 列级约束
+        		**id int primary key**,  -- 列级约束
         		name varchar(255)
         );
-        ## 第二种写法：primary key(id)单写一行
+        -- 第二种写法：primary key(id)单写一行
         create table t_vip(
         		id int,
         		name varchar(255),
@@ -2857,11 +2498,11 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
         insert into t_vip(id,name) values(1,'zhangsan');
         insert into t_vip(id,name) values(2,'lisi');
          
-        //错误：不能重复
+        -- 错误：不能重复
         insert into t_vip(id,name) values(2,'wangwu');
         ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
          
-        //错误：不能为NULL
+        -- 错误：不能为NULL
         insert into t_vip(name) values('zhaoliu');
         ERROR 1364 (HY000): Field 'id' doesn't have a default value
         ```
@@ -2870,7 +2511,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
         
         ```sql
         drop table if exists t_vip;
-        // id和name联合起来做主键：**复合主键**！！！！
+        -- id和name联合起来做主键：**复合主键**！！！！
         create table t_vip(
         		id int,
         		name varchar(255),
@@ -2880,7 +2521,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
         insert into t_vip(id,name,email) values(1,'zhangsan','zhangsan@123.com');
         insert into t_vip(id,name,email) values(1,'lisi','lisi@123.com');
          
-        //错误：不能重复
+        -- 错误：不能重复
         insert into t_vip(id,name,email) values(1,'lisi','lisi@123.com');
         ERROR 1062 (23000): Duplicate entry '1-lisi' for key 'PRIMARY'
         ```
@@ -2902,7 +2543,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
     **结论：一张表，主键约束只能添加1个。（主键只能有1个。）**
     ```
     
-    主键值建议使用：`int, bigint, char` 等类型。
+    主键值建议使用：`int, bigint, char`等类型。
     
     不建议使用：varchar 来做主键。主键值一般都是数字，一般都是定长的！
     
@@ -2921,7 +2562,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
 - **自动维护一个主键值**
     
     ```sql
-    //auto_increment表示自增，从1开始，以1递增！
+    -- auto_increment表示自增，从1开始，以1递增！
     drop table if exists t_vip;
     create table t_vip(
     		id int primary key **auto_increment**,
@@ -2964,7 +2605,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
     - 第一种方案：班级和学生存储在一张表中？？？
         
         ```sql
-        ## t_student
+        -- t_student
         no(pk)    name        classno      classname
         ----------------------------------------------------------------------
         1         jack        100          北京市大兴区亦庄镇第二中学高三1班
@@ -2984,7 +2625,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
     - 第二种方案：班级一张表、学生一张表
         
         ```sql
-        ## t_class 班级表
+        -- t_class 班级表
         classno(pk)         classname
         ------------------------------------------------------
         100                 北京市大兴区亦庄镇第二中学高三1班
@@ -2992,7 +2633,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
         ```
         
         ```sql
-        ## t_student 学生表
+        -- t_student 学生表
         no(pk)    name          cno(FK引用t_class这张表的classno)
         -------------------------------------------------------------
         1         jack          100
@@ -3032,7 +2673,7 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
 - **创建外键约束**
     
     ```sql
-    // foreign key(外键名) references 表名(字段名)
+    -- foreign key(外键名) references 表名(字段名)
     create table t_student(
     	id int auto_increment primary key,
     	uid int not null,
@@ -3052,11 +2693,11 @@ insert into t_vip(id) values(2); //错误了：name不能为NULL。
 
 从上图可以看出， MySQL 主要由下面几部分构成：
 
-- **连接器：** 身份认证和权限相关（登录 MySQL 的时候）。
-- **查询缓存：** 执行查询语句的时候，会先查询缓存（MySQL 8.0 版本后移除，因为这个功能不太实用）。
-- **分析器：** 没有命中缓存的话，SQL 语句就会经过分析器，分析器说白了就是要先看你的 SQL 语句要干嘛，再检查你的 SQL 语句语法是否正确。
-- **优化器：** 按照 MySQL 认为最优的方案去执行。
-- **执行器：** 执行语句，然后从存储引擎返回数据。 执行语句之前会先判断是否有权限，如果没有权限的话，就会报错。
+- **连接器：**身份认证和权限相关（登录 MySQL 的时候）。
+- **查询缓存：**执行查询语句的时候，会先查询缓存（MySQL 8.0 版本后移除，因为这个功能不太实用）。
+- **分析器：**没有命中缓存的话，SQL 语句就会经过分析器，分析器说白了就是要先看你的 SQL 语句要干嘛，再检查你的 SQL 语句语法是否正确。
+- **优化器：**按照 MySQL 认为最优的方案去执行。
+- **执行器：**执行语句，然后从存储引擎返回数据。 执行语句之前会先判断是否有权限，如果没有权限的话，就会报错。
 - **插件式存储引擎**：主要负责数据的存储和读取，采用的是插件式架构，支持 InnoDB、MyISAM、Memory 等多种存储引擎。InnoDB 是 MySQL 的默认存储引擎，绝大部分场景使用 InnoDB 就是最好的选择。
 
 #### 建表指定存储引擎
@@ -3165,8 +2806,8 @@ MySQL 5.5 之前，MyISAM 引擎是 MySQL 的默认存储引擎；在 MySQL 5.5 
 虽然，MyISAM 的性能还行，各种特性也还不错（比如全文索引、压缩、空间函数等）。但是，MyISAM 不支持事务和行级锁，而且最大的缺陷就是崩溃后无法安全恢复。
 
 > **MyISAM和InnoDB的详细介绍请参考官方文档：**
-InnoDB：[https://dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html](https://dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html)
-MyISAM：[https://dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html](https://dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html)
+InnoDB：[https:-- dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html](https:-- dev.mysql.com/doc/refman/8.0/en/innodb-introduction.html)
+MyISAM：[https:-- dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html](https:-- dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html)
 > 
 - **是否支持行级锁**
 
@@ -3186,7 +2827,7 @@ MyISAM 不支持外键，而 InnoDB 支持。
 
 外键对于维护数据一致性非常有帮助，但是对性能有一定的损耗。因此，通常情况下，我们是不建议在实际生产项目中使用外键的，在业务代码中进行约束即可！
 
-阿里的《Java 开发手册》也是明确规定禁止使用外键的（详见[阿里p3c-SQL](https://alibaba.github.io/p3c/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%AF%AD%E5%8F%A5.html)）。
+阿里的《Java 开发手册》也是明确规定禁止使用外键的（详见[阿里p3c-SQL](https:-- alibaba.github.io/p3c/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%AF%AD%E5%8F%A5.html)）。
 
 ![image.png](./imgs/DDL_1.png)
 
@@ -3198,7 +2839,7 @@ MyISAM 不支持外键，而 InnoDB 支持。
 
 MyISAM 不支持，而 InnoDB 支持。
 
-使用 InnoDB 的数据库在异常崩溃后，数据库重新启动的时候会保证数据库恢复到崩溃前的状态。这个恢复的过程依赖于 `redo log` 。
+使用 InnoDB 的数据库在异常崩溃后，数据库重新启动的时候会保证数据库恢复到崩溃前的状态。这个恢复的过程依赖于`redo log`。
 
 - **是否支持 MVCC**
 
@@ -3216,7 +2857,7 @@ InnoDB 引擎中，其数据文件本身就是索引文件。相比 MyISAM，索
 
 InnoDB 的性能比 MyISAM 更强大，不管是在读写混合模式下还是只读模式下，随着 CPU 核数的增加，InnoDB 的读写能力呈线性增长。MyISAM 因为读写不能并发，它的处理能力跟核数没关系。
 
-![InnoDB 和 MyISAM 性能对比](https://oss.javaguide.cn/github/javaguide/mysql/innodb-myisam-performance-comparison.png)
+![InnoDB 和 MyISAM 性能对比](https:-- oss.javaguide.cn/github/javaguide/mysql/innodb-myisam-performance-comparison.png)
 
 - **数据缓存策略和机制实现不同**
 
@@ -3224,7 +2865,7 @@ InnoDB 使用缓冲池（Buffer Pool）缓存数据页和索引页，MyISAM 使�
 
 ### alter表结构
 
-> 官方文档：[https://dev.MySQL.com/doc/refman/8.0/en/alter-table.html](https://dev.mysql.com/doc/refman/8.0/en/alter-table.html)
+> 官方文档：[https:-- dev.MySQL.com/doc/refman/8.0/en/alter-table.html](https:-- dev.mysql.com/doc/refman/8.0/en/alter-table.html)
 > 
 
 **添加一个字段，删除一个字段，修改一个字段**对表结构的修改需要使用：alter，属于 DDL 语句。
@@ -3311,7 +2952,7 @@ alter table 表名 drop 列名;
 >   ```
 > 
 > - **关闭自动提交**
->   可以使用`SET autocommit = 0;`语句来设置事务的自动提交模式。此命令将关闭自动提交模式，之后的每个事务都需要手动提交。
+>   可以使用`SETautocommit = 0;`语句来设置事务的自动提交模式。此命令将关闭自动提交模式，之后的每个事务都需要手动提交。
 > 
 > - **永久关闭自动提交**
 >   如果希望永久关闭自动提交，可以修改MySQL的配置文件`my.cnf`，添加以下内容：
@@ -3334,7 +2975,7 @@ Database changed
 mysql> select * from dept_bak;
 Empty set (0.00 sec)
  
-mysql> **start transaction;**
+mysql> start transaction;
 Query OK, 0 rows affected (0.00 sec)
  
 mysql> insert into dept_bak values(10,'abc', 'tj');
@@ -3403,7 +3044,7 @@ mysql> select * from dept_bak;
 +--------+-------+------+
 4 rows in set (0.00 sec)
  
-// **提交后无法回滚**
+-- 提交后无法回滚
 mysql> rollback;
 Query OK, 0 rows affected (0.00 sec)
  
@@ -3650,7 +3291,7 @@ commit
 #### 查看隔离级别
 
 ```sql
-// 5.x 版本
+-- 5.x 版本
 SELECT @@tx_isolation;
 +-----------------+
 | @@tx_isolation  |
@@ -3658,7 +3299,7 @@ SELECT @@tx_isolation;
 | REPEATABLE-READ |
 +-----------------+
  
-// 8.x 版本
+-- 8.x 版本
 SELECT @@transaction_isolation;
 +-------------------------+
 | @@transaction_isolation |
@@ -3670,7 +3311,7 @@ SELECT @@transaction_isolation;
 #### 设定隔离级别
 
 ```sql
-// SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对所有会话有效
+-- SESSION 是会话级别，表示只针对当前会话有效，GLOBAL 表示对所有会话有效
 SET [ SESSION | GLOBAL ] TRANSACTION ISOLATION LEVEL {READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE };
 ```
 
@@ -3691,7 +3332,7 @@ MySQL中定义了很多种权限，但是常用的就以下几种：
 | DROP | 删除数据库/表/视图 |
 | CREATE | 创建数据库/表 |
 
-上述只是简单罗列了常见的几种权限描述，其他权限描述及含义，可以直接参考[官方文档](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html)。
+上述只是简单罗列了常见的几种权限描述，其他权限描述及含义，可以直接参考[官方文档](https:-- dev.mysql.com/doc/refman/8.0/en/privileges-provided.html)。
 
 - 查询权限：`SHOW GRANTS FOR '用户名'@'主机名';`
 - 授予权限：`GRANT 权限列表 ON 数据库名.表名 TO '用户名'@'主机名';`
@@ -3744,7 +3385,7 @@ select * from t_user where name = 'jack';
 
 **用了索引就一定能提高查询性能吗？**
 
-**不一定。** 大多数情况下，合理使用索引确实比全表扫描快得多。但也有例外：
+**不一定。**大多数情况下，合理使用索引确实比全表扫描快得多。但也有例外：
 
 - **数据量太小**：如果表里的数据非常少（比如就几百条），全表扫描可能比通过索引查找更快，因为走索引本身也有开销。
 - **查询结果集占比过大**：如果要查询的数据占了整张表的大部分（比如超过 20%-30%），优化器可能会认为全表扫描更划算，因为通过索引多次回表（随机 I/O）的成本可能高于一次顺序的全表扫描。
@@ -3757,7 +3398,7 @@ select * from t_user where name = 'jack';
     - BTree 索引：MySQL 里默认和最常用的索引类型。只有叶子节点存储 value，非叶子节点只有指针和 key。存储引擎 MyISAM 和 InnoDB 实现 BTree 索引都是使用 B+Tree，但二者实现方式不一样。
     - 哈希索引：类似键值对的形式，一次即可定位。
     - RTree 索引：一般不会使用，仅支持 geometry 数据类型，优势在于范围查找，效率较低，通常使用搜索引擎如 ElasticSearch 代替。
-    - 全文索引：对文本的内容进行分词，进行搜索。目前只有 `CHAR`、`VARCHAR`、`TEXT` 列上可以创建全文索引。一般不会使用，效率较低，通常使用搜索引擎如 ElasticSearch 代替。
+    - 全文索引：对文本的内容进行分词，进行搜索。目前只有`CHAR`、`VARCHAR`、`TEXT`列上可以创建全文索引。一般不会使用，效率较低，通常使用搜索引擎如 ElasticSearch 代替。
 - 按照底层存储方式角度划分：
     - **聚簇索引（聚集索引）：索引结构和数据一起存放的索引**，InnoDB 中的主键索引就属于聚簇索引。必须有，而且只有一个。
     - **非聚簇索引（非聚集索引）：索引结构和数据分开存放的索引**，二级索引（辅助索引）就属于非聚簇索引。MySQL 的 MyISAM 引擎，不管主键还是非主键，使用的都是非聚簇索引。可以存在多个。
@@ -3770,7 +3411,7 @@ select * from t_user where name = 'jack';
         
         `CREATE INDEX idx_user_pro_age_sta ON tb_user(profession,age,status); --为profession、age、status创建联合索引`
         
-    - **全文索引（FULLTEXT）**：对文本的内容进行分词，进行搜索。目前只有 `CHAR`、`VARCHAR`、`TEXT` 列上可以创建全文索引。一般不会使用，效率较低，通常使用搜索引擎如 ElasticSearch 代替。
+    - **全文索引（FULLTEXT）**：对文本的内容进行分词，进行搜索。目前只有`CHAR`、`VARCHAR`、`TEXT`列上可以创建全文索引。一般不会使用，效率较低，通常使用搜索引擎如 ElasticSearch 代替。
     - 前缀索引：对文本的前几个字符创建索引，相比普通索引建立的数据更小，因为只取前几个字符。
     
     > 
@@ -3789,7 +3430,7 @@ select * from t_user where name = 'jack';
 
 使用表中的多个字段创建索引，就是**联合索引**，也叫**组合索引**或**复合索引**。
 
-以 `score` 和 `name` 两个字段建立联合索引：
+以`score`和`name`两个字段建立联合索引：
 
 ```sql
 ALTER TABLE `cus_order` ADD INDEX id_score_name(score,name);
@@ -3799,11 +3440,11 @@ ALTER TABLE `cus_order` ADD INDEX id_score_name(score,name);
 
 最左匹配原则会一直向右匹配，直到遇到范围查询（如 >、<）为止。对于 >=、<=、BETWEEN 以及前缀匹配 LIKE 的范围查询，不会停止匹配。
 
-假设有一个联合索引 `(column1, column2, column3)`，其从左到右的所有前缀为 `(column1)`、`(column1, column2)`、`(column1, column2, column3)`（创建 1 个联合索引相当于创建了 3 个索引），包含这些列的所有查询都会走索引而不会全表扫描。
+假设有一个联合索引`(column1, column2, column3)`，其从左到右的所有前缀为`(column1)`、`(column1, column2)`、`(column1, column2, column3)`（创建 1 个联合索引相当于创建了 3 个索引），包含这些列的所有查询都会走索引而不会全表扫描。
 
 在使用联合索引时，可以将区分度高的字段放在最左边，这也可以过滤更多数据。
 
-1. 创建一个名为 `student` 的表，这张表只有 `id`、`name`、`class` 这 3 个字段。
+1. 创建一个名为`student`的表，这张表只有`id`、`name`、`class`这 3 个字段。
     
     ```sql
     CREATE TABLE `student` (
@@ -3817,13 +3458,13 @@ ALTER TABLE `cus_order` ADD INDEX id_score_name(score,name);
     
 2. 下面分别测试三条不同的 SQL 语句。
     
-    https://oss.javaguide.cn/github/javaguide/database/mysql/leftmost-prefix-matching-rule.png
+    https:-- oss.javaguide.cn/github/javaguide/database/mysql/leftmost-prefix-matching-rule.png
     
     ```sql
-    ## 可以命中索引
+    -- 可以命中索引
     SELECT * FROM student WHERE name = 'Anne Henry';
     EXPLAIN SELECT * FROM student WHERE name = 'Anne Henry' AND class= 'lIrm08RYVk';
-    ## 无法命中索引
+    -- 无法命中索引
     SELECT * FROM student WHERE class= 'lIrm08RYVk';
     ```
     
@@ -3831,12 +3472,12 @@ ALTER TABLE `cus_order` ADD INDEX id_score_name(score,name);
 
 💡
 
-再来看一个常见的面试题：如果有索引 `联合索引(a, b, c)`，查询 `a=1 AND c=1` 会走索引么？`c=1` 呢？`b=1 AND c=1` 呢？ `b = 1 AND a = 1 AND c = 1` 呢？
+再来看一个常见的面试题：如果有索引`联合索引(a, b, c)`，查询`a=1 AND c=1`会走索引么？`c=1`呢？`b=1 AND c=1`呢？`b = 1 AND a = 1 AND c = 1`呢？
 
-1. 查询 `a=1 AND c=1`：根据最左前缀匹配原则，查询可以使用索引的前缀部分。因此，该查询仅在 `a=1` 上使用索引，然后对结果进行 `c=1` 的过滤。
-2. 查询 `c=1`：由于查询中不包含最左列 `a`，根据最左前缀匹配原则，整个索引都无法被使用。
-3. 查询 `b=1 AND c=1`：和第二种一样的情况，整个索引都不会使用。
-4. 查询 `b=1 AND a=1 AND c=1`：这个查询是可以用到索引的。查询优化器分析 SQL 语句时，对于联合索引，会对查询条件进行重排序，以便用到索引。会将 `b=1` 和 `a=1` 的条件进行重排序，变成 `a=1 AND b=1 AND c=1`。
+1. 查询`a=1 AND c=1`：根据最左前缀匹配原则，查询可以使用索引的前缀部分。因此，该查询仅在`a=1`上使用索引，然后对结果进行`c=1`的过滤。
+2. 查询`c=1`：由于查询中不包含最左列`a`，根据最左前缀匹配原则，整个索引都无法被使用。
+3. 查询`b=1 AND c=1`：和第二种一样的情况，整个索引都不会使用。
+4. 查询`b=1 AND a=1 AND c=1`：这个查询是可以用到索引的。查询优化器分析 SQL 语句时，对于联合索引，会对查询条件进行重排序，以便用到索引。会将`b=1`和`a=1`的条件进行重排序，变成`a=1 AND b=1 AND c=1`。
 
 
 ###### 前缀索引
@@ -3861,7 +3502,7 @@ ALTER TABLE `cus_order` ADD INDEX id_score_name(score,name);
 #### 索引的实现原理（底层数据结构）
 
 ```sql
-## 假设有一张用户表：t_user
+--  假设有一张用户表：t_user
 id(PK)  name       每一行记录在硬盘上都有物理存储编号
 ----------------------------------------------------------------------------------
 100     zhangsan   0x1111
@@ -3873,7 +3514,7 @@ id(PK)  name       每一行记录在硬盘上都有物理存储编号
 130     tom        0x7777
 ```
 
-![img.png](Chapter7%20DCL/Untitled.png)
+![img.png](./imgs/DCL.png)
 
 - **在任何数据库当中主键上都会自动添加索引对象，id 字段上自动有索引，因为 id 是 PK。另外在 MySQL 当中，一个字段上如果有 unique 约束的话，也会自动创建索引对象。**
 - 在任何数据库当中，任何一张表的任何一条记录在硬盘存储上都有一个硬盘的物理存储编号。
@@ -3896,7 +3537,7 @@ id(PK)  name       每一行记录在硬盘上都有物理存储编号
 - **删除索引**：`DROP INDEX index_name ON table_name;`
 
 ```sql
-## 创建索引：给 emp 表的 ename 字段添加索引，起名：emp_ename_index
+--  创建索引：给 emp 表的 ename 字段添加索引，起名：emp_ename_index
 create index emp_ename_index on emp(ename);
 
 ## 删除索引：将 emp 表上的 emp_ename_index 索引对象删除
@@ -3930,7 +3571,7 @@ drop index emp_ename_index on emp;
     |  1 | SIMPLE      | emp   | NULL       | ref  | emp_job_sal_index | emp_job_sal_index | 30      | const |    3 |   100.00 | NULL  |
     +----+-------------+-------+------------+------+-------------------+-------------------+---------+-------+------+----------+-------+
      
-    explain select * from emp where sal = 800;   //未使用job字段
+    explain select * from emp where sal = 800;   -- 未使用job字段
     +----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
     | id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
     +----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
@@ -3957,7 +3598,7 @@ drop index emp_ename_index on emp;
     |  1 | SIMPLE      | emp   | NULL       | ALL  | NULL          | NULL | NULL    | NULL |   14 |   100.00 | Using where |
     +----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
     
-    ## 在where当中索引列使用了函数
+    -- 在where当中索引列使用了函数
     explain select * from emp where lower(ename) = 'smith';
     +----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
     | id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
@@ -3966,7 +3607,7 @@ drop index emp_ename_index on emp;
     +----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
     ```
     
-3. 以 % 开头的 LIKE 查询比如 `LIKE '%abc';`
+3. 以 % 开头的 LIKE 查询比如`LIKE '%abc';`
     
     ```sql
     explain select * from emp where ename like '%T';
@@ -4046,7 +3687,7 @@ MySQL> show variables like 'slow_query_log';
 如果要开启慢查询日志，需要在MySQL的配置文件（/etc/my.cnf）中配置如下信息：
 
 ```sql
-## 开启 MySQL 慢日志查询开关
+--  开启 MySQL 慢日志查询开关
 slow_query_log=1
 
 ## 设置慢日志的时间为 2 秒，SQL语句执行时间超过 2 秒，就会视为慢查询，记录慢查询日志
@@ -4339,7 +3980,7 @@ update course set name = 'SpringBoot' where name = 'PHP';
 #### where 和 having：优先使用 where
 
 ```sql
-## 找出每个部门的最高薪资，并要求最高薪资 > 3000
+--  找出每个部门的最高薪资，并要求最高薪资 > 3000
 
 -- 第一步：按部门编号分组，求每组最大值
 select deptno, max(sal) from emp group by deptno;
@@ -4373,7 +4014,7 @@ select deptno, max(sal) from emp where sal > 3000 group by deptno;
 #### union
 
 ```sql
-## 案例：查询工作岗位是 MANAGER 和 SALESMAN 的员工
+--  案例：查询工作岗位是 MANAGER 和 SALESMAN 的员工
 
 ## 之前的方式
 select ename, job from emp where job = 'MANAGER' or job = 'SALESMAN';
@@ -4418,7 +4059,7 @@ select ename, job from emp where job = 'SALESMAN';
     - `INET_ATON()`：把 ip 转为无符号整型（4-8 位）
     - `INET_NTOA()`：把整型的 ip 转为地址。
     
-    插入数据前，先用 `INET_ATON()` 把 ip 地址转为整型；显示数据时，使用 `INET_NTOA()` 把整型的 ip 地址转为地址显示即可。
+    插入数据前，先用`INET_ATON()`把 ip 地址转为整型；显示数据时，使用`INET_NTOA()`把整型的 ip 地址转为地址显示即可。
     
 - **对于非负型的数据 (如自增 ID、整型 IP、年龄) 来说，要优先使用无符号整型来存储。**
     
@@ -4482,7 +4123,7 @@ where create_time >= '20190101' and create_time < '20190102'
 
 
 ```sql
-// 面向视图查询
+-- 面向视图查询
 select * from dept2_view;
 +--------+------------+----------+
 | DEPTNO | DNAME      | LOC      |
@@ -4493,10 +4134,10 @@ select * from dept2_view;
 |     40 | OPERATIONS | BOSTON   |
 +--------+------------+----------+
 
-// 面向视图插入
+-- 面向视图插入
 insert into dept2_view(deptno,dname,loc) values(60,'SALES', 'BEIJING');
  
-// 查询原表数据
+-- 查询原表数据
 select * from dept2;
 +--------+------------+----------+
 | DEPTNO | DNAME      | LOC      |
@@ -4505,18 +4146,18 @@ select * from dept2;
 |     20 | RESEARCH   | DALLAS   |
 |     30 | SALES      | CHICAGO  |
 |     40 | OPERATIONS | BOSTON   |
-|     60 | SALES      | BEIJING  |     //新插入了一条数据！
+|     60 | SALES      | BEIJING  |     -- 新插入了一条数据！
 +--------+------------+----------+
  
-// 面向视图删
+-- 面向视图删
 delete from dept2_view;
  
-// 查询原表数据
+-- 查询原表数据
 select * from dept2;
 Empty set (0.00 sec)
 
-// 面向视图更新
-// 创建视图对象
+-- 面向视图更新
+-- 创建视图对象
 create view
 		emp_dept_view
 as
@@ -4529,7 +4170,7 @@ as
 		on
 				e.deptno = d.deptno;
  
-// 查询视图对象
+-- 查询视图对象
 select * from emp_dept_view;
 +--------+---------+------------+
 | ename  | sal     | dname      |
@@ -4550,10 +4191,10 @@ select * from emp_dept_view;
 | JAMES  |  950.00 | SALES      |
 +--------+---------+------------+
  
-//面向视图更新
+-- 面向视图更新
 update emp_dept_view set sal = 1000 where dname = 'ACCOUNTING';
  
-// 原表数据被更新
+-- 原表数据被更新
 MySQL> select * from emp;
 +-------+--------+-----------+------+------------+---------+---------+--------+
 | EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL     | COMM    | DEPTNO |
@@ -4637,7 +4278,7 @@ as
 
 存储过程思想上很简单，就是数据库 SQL 语言层面的代码封装与重用。
 
-![image.png](Chapter7%20DCL/image.png)
+![image.png](./imgs/DCL_0.png)
 
 #### 特点
 
@@ -5220,7 +4861,7 @@ SELECT func(100);
 > 
 > 在MySQL8.0版本中binlog默认是开启的，一旦开启了，MySQL就要求在定义存储过程时，需要指定characteristic特性，否则就会报如下错误：
 > 
-> `ERROR 1418 (HY000): This function has none of DETERMINISTIC, NO SQL,or READS SQL DATA in its declaration and binary logging is enabled (you *might* want to use the less safe log_bin_trust_function_creators variable)`
+> `ERROR1418(HY000):Thisfunctionhas noneofDETERMINISTIC,NOSQL,orREADSSQLDATAinitsdeclarationandbinaryloggingisenabled(you *might* wanttousethelesssafelog_bin_trust_function_creatorsvariable)`
 > 
 
 ### 触发器
@@ -5525,8 +5166,8 @@ FROM Customers;` |
 | SUBSTRING_INDEX(s, delimiter, number) | 返回从字符串 s 的第 number 个出现的分隔符 delimiter 之后的子串。
 如果 number 是正数，返回第 number 个字符左边的字符串。
 如果 number 是负数，返回第(number 的绝对值(从右边数))个字符右边的字符串。 | `SELECT SUBSTRING_INDEX('a*b','*',1) -- a
-SELECT SUBSTRING_INDEX('a*b','*',-1)    -- b
-SELECT SUBSTRING_INDEX(SUBSTRING_INDEX('a*b*c*d*e','*',3),'*',-1)    -- c` |
+SELECT SUBSTRING_INDEX('a*b','*',-1)-- b
+SELECT SUBSTRING_INDEX(SUBSTRING_INDEX('a*b*c*d*e','*',3),'*',-1)-- c` |
 | LTRIM(s) | 去掉字符串 s 开始处的空格 | 去掉字符串 RUNOOB开始处的空格：
 
 `SELECT LTRIM("    RUNOOB") AS LeftTrimmedString;-- RUNOOB` |
@@ -5755,13 +5396,13 @@ MySQL> SELECT TIMESTAMP('2003-12-31');
         -> '2003-12-31 00:00:00'
 MySQL> SELECT TIMESTAMP('2003-12-31 12:00:00','12:00:00');
         -> '2004-01-01 00:00:00'` |
-| TIMESTAMPDIFF(unit,datetime_expr1,datetime_expr2) | 计算时间差，返回 datetime_expr2 − datetime_expr1 的时间差 | `MySQL> SELECT TIMESTAMPDIFF(DAY,'2003-02-01','2003-05-01');   // 计算两个时间相隔多少天
+| TIMESTAMPDIFF(unit,datetime_expr1,datetime_expr2) | 计算时间差，返回 datetime_expr2 − datetime_expr1 的时间差 | `MySQL> SELECT TIMESTAMPDIFF(DAY,'2003-02-01','2003-05-01');   -- 计算两个时间相隔多少天
         -> 89
-MySQL> SELECT TIMESTAMPDIFF(MONTH,'2003-02-01','2003-05-01');   // 计算两个时间相隔多少月
+MySQL> SELECT TIMESTAMPDIFF(MONTH,'2003-02-01','2003-05-01');   -- 计算两个时间相隔多少月
         -> 3
-MySQL> SELECT TIMESTAMPDIFF(YEAR,'2002-05-01','2001-01-01');    // 计算两个时间相隔多少年
+MySQL> SELECT TIMESTAMPDIFF(YEAR,'2002-05-01','2001-01-01');    -- 计算两个时间相隔多少年
         -> -1
-MySQL> SELECT TIMESTAMPDIFF(MINUTE,'2003-02-01','2003-05-01 12:05:55');  // 计算两个时间相隔多少分钟
+MySQL> SELECT TIMESTAMPDIFF(MINUTE,'2003-02-01','2003-05-01 12:05:55');  -- 计算两个时间相隔多少分钟
         -> 128885` |
 | TO_DAYS(d) | 计算日期 d 距离 0000 年 1 月 1 日的天数 | `SELECT TO_DAYS('0001-01-01 01:01:01')
 -> 366` |
@@ -5975,7 +5616,7 @@ MySQLbinlog [ 参数选项 ] logfilename
 如果需要开启查询日志，可以修改MySQL的配置文件 /etc/my.cnf 文件，添加如下内容：
 
 ```sql
-## 该选项用来开启查询日志，可选值：0 或者 1；0 代表关闭，1 代表开启
+--  该选项用来开启查询日志，可选值：0 或者 1；0 代表关闭，1 代表开启
 general_log=1
 ## 设置日志的文件名，如果没有指定，默认的文件名为 host_name.log
 general_log_file=MySQL_query.log
@@ -5992,7 +5633,7 @@ general_log_file=MySQL_query.log
 如果需要开启慢查询日志，需要在MySQL的配置文件 /etc/my.cnf 中配置如下参数：
 
 ```sql
-## 慢查询日志
+--  慢查询日志
 slow_query_log=1
 ## 执行时间参数
 long_query_time=2
@@ -6001,7 +5642,7 @@ long_query_time=2
 默认情况下，不会记录管理语句，也不会记录不使用索引进行查找的查询。可以使用`log_slow_admin_statements`和更改此行为 `log_queries_not_using_indexes`，如下所述。
 
 ```sql
-## 记录执行较慢的管理语句
+--  记录执行较慢的管理语句
 log_slow_admin_statements =1
 ## 记录执行较慢的未使用索引的语句
 log_queries_not_using_indexes = 1
@@ -6045,21 +5686,21 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 1. 修改配置文件 /etc/my.cnf
     
     ```sql
-    ## MySQL 服务ID，保证整个集群环境中唯一，取值范围：1 – 2^{32}-1，默认为1
+    -- MySQL 服务ID，保证整个集群环境中唯一，取值范围：1 – 2^{32}-1，默认为1
     server-id=1
-    ## 是否只读，1 代表只读，0 代表读写
+    -- 是否只读，1 代表只读，0 代表读写
     read-only=0
-    ## 忽略的数据，指不需要同步的数据库
-    ## binlog-ignore-db=MySQL
-    ## 指定同步的数据库
-    ## binlog-do-db=db01
+    -- 忽略的数据，指不需要同步的数据库
+    -- binlog-ignore-db=MySQL
+    -- 指定同步的数据库
+    -- binlog-do-db=db01
     ```
     
 2. 重启MySQL服务器：`systemctl restart MySQLd`
 3. 登录MySQL，创建远程连接的账号，并授予主从复制权限
     
     ```sql
-    ## 创建 Frank 用户，并设置密码，该用户可在任意主机连接该 MySQL 服务
+    -- 创建 Frank 用户，并设置密码，该用户可在任意主机连接该 MySQL 服务
     CREATE USER 'Frank'@'%' IDENTIFIED WITH MySQL_native_password BY '********';
     
     #为 'Frank'@'%' 用户分配主从复制权限
@@ -6089,9 +5730,9 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 1. 修改配置文件 /etc/my.cnf
     
     ```sql
-    ## MySQL 服务ID，保证整个集群环境中唯一，取值范围：1 – 2^{32}-1，和主库不一样即可
+    -- MySQL 服务ID，保证整个集群环境中唯一，取值范围：1 – 2^{32}-1，和主库不一样即可
     server-id=2
-    ## 是否只读，1 代表只读，0 代表读写
+    -- 是否只读，1 代表只读，0 代表读写
     read-only=1
     ```
     
@@ -6221,7 +5862,7 @@ MySQL主从复制的核心就是二进制日志，具体的过程如下：
 
 #### 概述
 
-MyCathttp://www.mycat.org.cn/downloads是开源的、活跃的、基于Java语言编写的MySQL数据库中间件。可以像使用MySQL一样来使用MyCat，对于开发人员来说根本感觉不到MyCat的存在。
+MyCathttp:-- www.mycat.org.cn/downloads是开源的、活跃的、基于Java语言编写的MySQL数据库中间件。可以像使用MySQL一样来使用MyCat，对于开发人员来说根本感觉不到MyCat的存在。
 
 开发人员只需要连接MyCat即可，而具体底层用到几台数据库，每一台数据库服务器里面存储了什么数据，都无需关心。 具体的分库分表的策略，只需要在MyCat中配置即可。
 
@@ -6277,7 +5918,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE MyCat:schema SYSTEM "schema.dtd">
-<MyCat:schema xmlns:MyCat="http://io.MyCat/">
+<MyCat:schema xmlns:MyCat="http:-- io.MyCat/">
     <schema name="DB01" checkSQLschema="true" sqlMaxLimit="100">
         <table name="TB_ORDER" dataNode="dn1,dn2,dn3" rule="auto-sharding-long"/>
     </schema>
@@ -6288,17 +5929,17 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 
     <dataHost name="dhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="MySQL" dbDriver="jdbc" switchType="1" slaveThreshold="100">
         <heartbeat>select user()</heartbeat>
-        <writeHost host="master" url="jdbc:MySQL://192.168.200.210:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
+        <writeHost host="master" url="jdbc:MySQL:-- 192.168.200.210:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
     </dataHost>
 
     <dataHost name="dhost2" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="MySQL" dbDriver="jdbc" switchType="1" slaveThreshold="100">
         <heartbeat>select user()</heartbeat>
-        <writeHost host="master" url="jdbc:MySQL://192.168.200.213:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
+        <writeHost host="master" url="jdbc:MySQL:-- 192.168.200.213:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
     </dataHost>
                 
     <dataHost name="dhost3" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="MySQL" dbDriver="jdbc" switchType="1" slaveThreshold="100">
         <heartbeat>select user()</heartbeat>
-        <writeHost host="master" url="jdbc:MySQL://192.168.200.214:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
+        <writeHost host="master" url="jdbc:MySQL:-- 192.168.200.214:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
     </dataHost>
 </MyCat:schema>
 ```
@@ -6347,7 +5988,7 @@ MyCat默认开通2个端口，可以在`server.xml`中进行修改。
 ```xml
 <dataHost name="dhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="MySQL" dbDriver="jdbc" switchType="1" slaveThreshold="100">
     <heartbeat>select user()</heartbeat>
-    <writeHost host="master" url="jdbc:MySQL://192.168.200.210:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
+    <writeHost host="master" url="jdbc:MySQL:-- 192.168.200.210:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
 </dataHost>
 ```
 
@@ -6961,8 +6602,8 @@ MySQL的主从复制，是基于二进制日志（binlog）实现的。
     <dataNode name="dn7" dataHost="dhost7" database="itcast" />
     <dataHost name="dhost7" maxCon="1000" minCon="10" balance="1" writeType="0" dbType="mysql" dbDriver="jdbc" switchType="1" slaveThreshold="100">
         <heartbeat>select user()</heartbeat>
-        <writeHost host="master1" url="jdbc:mysql://192.168.200.211:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="******" >
-            <readHost host="slave1" url="jdbc:mysql://192.168.200.212:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="******" />
+        <writeHost host="master1" url="jdbc:mysql:-- 192.168.200.211:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="******" >
+            <readHost host="slave1" url="jdbc:mysql:-- 192.168.200.212:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="******" />
         </writeHost>
     </dataHost>
     ```
@@ -7024,12 +6665,12 @@ MyCat控制后台数据库的读写分离和负载均衡由`schema.xml`文件`da
     <dataHost name="dhost7" maxCon="1000" minCon="10" balance="1" writeType="0" dbType="mysql" dbDriver="jdbc" switchType="1" slaveThreshold="100">
         <heartbeat>select user()</heartbeat>
         
-        <writeHost host="master1" url="jdbc:mysql://192.168.200.211:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" >
-            <readHost host="slave1" url="jdbc:mysql://192.168.200.212:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
+        <writeHost host="master1" url="jdbc:mysql:-- 192.168.200.211:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" >
+            <readHost host="slave1" url="jdbc:mysql:-- 192.168.200.212:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
         </writeHost>
         
-        <writeHost host="master2" url="jdbc:mysql://192.168.200.213:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" >
-            <readHost host="slave2" url="jdbc:mysql://192.168.200.214:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
+        <writeHost host="master2" url="jdbc:mysql:-- 192.168.200.213:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" >
+            <readHost host="slave2" url="jdbc:mysql:-- 192.168.200.214:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" user="root" password="****" />
         </writeHost>
     </dataHost>
     ```

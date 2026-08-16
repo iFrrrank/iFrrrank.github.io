@@ -33,6 +33,12 @@ export default defineUserConfig({
   // 配置打包工具 Vite
   bundler: viteBundler({
     viteOptions: {
+      server: {
+        watch: {
+          // 忽略大资源目录，减少文件监听内存占用
+          ignored: ['**/videos/**']
+        }
+      },
       css: {
         // 关闭 SCSS 废弃警告
         preprocessorOptions: {
