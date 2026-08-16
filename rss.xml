@@ -6,8 +6,8 @@
     <link>https://iFrrrank.github.io/</link>
     <description>Frank 的个人技术博客，分享前后端开发、AI Agent、面试经验等内容</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 12 May 2026 14:16:51 GMT</pubDate>
-    <lastBuildDate>Tue, 12 May 2026 14:16:51 GMT</lastBuildDate>
+    <pubDate>Sun, 16 Aug 2026 14:36:46 GMT</pubDate>
+    <lastBuildDate>Sun, 16 Aug 2026 14:36:46 GMT</lastBuildDate>
     <generator>@vuepress/plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>AI</category>
@@ -29,6 +29,49 @@
 <p>AI Agent 是一种以大语言模型（LLM）为核心的智能系统，具备以下能力：</p>
 <h3>核心组件</h3>
 <p>| 组件 | 功能 | 示例 |<br>
+|</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>MySQL</title>
+      <link>https://iFrrrank.github.io/db/MySQL.html</link>
+      <guid>https://iFrrrank.github.io/db/MySQL.html</guid>
+      <source url="https://iFrrrank.github.io/rss.xml">MySQL</source>
+      <description>MySQL MySql概述 SQL、DB、DBMS以及三者之间的关系 DB: DataBase（数据库，数据库实际上在硬盘上以文件的形式存在） DBMS：DataBase Management System（数据库管理系统，常见的有：MySQL Oracle DB2 Sybase SqlServer...） SQL： 结构化查询语言，是一门标准通用的语...</description>
+      <pubDate>Sun, 16 Aug 2026 14:36:20 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>MySql概述</h2>
+<h3>SQL、DB、DBMS以及三者之间的关系</h3>
+<ul>
+<li>
+<p>DB:  DataBase（数据库，数据库实际上在硬盘上以文件的形式存在）</p>
+</li>
+<li>
+<p>DBMS：DataBase Management System（数据库管理系统，常见的有：MySQL Oracle DB2 Sybase SqlServer...）</p>
+</li>
+<li>
+<p>SQL：</p>
+<ol>
+<li>结构化查询语言，是一门标准通用的语言。标准的SQL适合于所有的数据库产品。</li>
+<li>SQL属于高级语言。只要能看懂英语单词的，写出来的SQL语句，可以读懂什么意思。</li>
+<li>SQL语句在执行的时候，实际上<strong>内部也会先进行编译，然后再执行SQL</strong>。（SQL语句的编译由DBMS完成。）</li>
+</ol>
+</li>
+<li>
+<p>关系：</p>
+<p><strong>DBMS负责执行SQL语句，通过执行SQL语句来操作DB当中的数据。DBMS -（执行）-&gt; SQL -（操作）-&gt; DB</strong></p>
+</li>
+</ul>
+<h3>SQL语句分类</h3>
+<ol>
+<li>DQL（Data <strong>Query</strong> Language，数据查询语言）：查询语句，凡是select语句都是DQL。</li>
+<li>DML（Data <strong>Manipulation</strong> Language，数据操作语言）：<code>insert delete update</code>，对表当中的数据进行增删改。</li>
+<li>DDL（Data <strong>Denifition</strong> Language，数据定义语言）：<code>create drop alter</code>，对表结构的增删改。</li>
+<li>TCL（事务控制语言）：commit提交事务，rollback回滚事务。（TCL中的T是<strong>Transaction</strong>）</li>
+<li>DCL（Data Control Language，数据控制语言）：grant授权、revoke撤销权限等。</li>
+</ol>
+<h3>系统数据库</h3>
+<p>| 数据库 | 含义 |<br>
 |</p>
 ]]></content:encoded>
     </item>
@@ -137,6 +180,96 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3>常用注解速查</h3>
 <p>| 注解              | 作用           | 使用场景     |<br>
 |</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>从 Seq2Seq 到 Attention</title>
+      <link>https://iFrrrank.github.io/transformer/from-seq2seq-to-attention.html</link>
+      <guid>https://iFrrrank.github.io/transformer/from-seq2seq-to-attention.html</guid>
+      <source url="https://iFrrrank.github.io/rss.xml">从 Seq2Seq 到 Attention</source>
+      <description>从 Seq2Seq 到 Attention 前言 自然语言处理（NLP）或是大语言模型（LLM）的底层原理是 Attention（注意力机制），它不仅是如今如日中天的 Transformer 架构的灵魂核心，更是开启这轮 AI 狂飙时代的超级引擎。 其实，技术的演进从来都不是凭空捏造的。要想真正吃透 Attention，必须先回到大模型爆发的“前夜”，...</description>
+      <category>AI</category>
+      <pubDate>Fri, 19 Jun 2026 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>前言</h2>
+<p>自然语言处理（NLP）或是大语言模型（LLM）的底层原理是 Attention（注意力机制），它不仅是如今如日中天的 Transformer 架构的灵魂核心，更是开启这轮 AI 狂飙时代的超级引擎。</p>
+<p>其实，技术的演进从来都不是凭空捏造的。要想真正吃透 Attention，必须先回到大模型爆发的“前夜”，去看看上一代霸主——传统 Seq2Seq 模型到底遇到了什么无法跨越的“致命瓶颈”。</p>
+<h2>什么是 Seq2Seq 模型？</h2>
+<p>Seq2Seq 是一种常见的 NLP 模型结构，全称是：sequence to sequence，翻译为“序列到序列”。顾名思义：从一个文本序列得到一个新的文本序列。这类任务的特点是：输入序列和输出序列的长度通常是不对等的。</p>
+<p>Seq2Seq 模型架构由编码器（Encoder）和解码器（Decoder）两部分组成：</p>
+<ol>
+<li>编码器（Encoder）：负责把输入的文本序列（比如“我爱机器学习”）一个个读进去，通过循环神经网络（RNN）不断更新隐状态（hidden state），最终将整句话的语义压缩成一个固定长度的向量。这个向量我们称之为上下文向量（Context Vector）。</li>
+<li>解码器（Decoder）：拿到这个 context 向量后，像挤牙膏一样，一步步把目标文本（比如 &quot;I love machine learning&quot;）吐出来。</li>
+</ol>
+<p>典型的任务有：机器翻译任务，文本摘要任务。</p>
+<div class="hint-container warning">
+<p class="hint-container-title">需要注意的是：</p>
+<ol>
+<li>Seq2Seq 模型中的 Encoder和 Decoder 一般采用的是循环神经网络 RNN（Transformer 模型还没出现的过去时代）。</li>
+<li><strong>context 的数组长度是基于 Encoder RNN 的隐藏层神经元数量的</strong>，在实际应用中，context 向量的长度是自定义的，比如可能是 256，512 或者 1024。</li>
+</ol>
+</div>
+<h2>基于 RNN 的 Seq2Seq 模型如何处理文本/长文本序列？</h2>
+<p>可以参考 <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-Seq2Seq-models-with-attention/" target="_blank" rel="noopener noreferrer">jalammar</a> 制作的动画对 Seq2Seq 处理文本/长文本序列有一个清晰的认识。</p>
+<p><video src="/videos/Seq2Seq.mp4" controls width="100%"></video></p>
+<p>我们用数学语言来更精确地还原这个过程。以机器翻译为例，假设序列输入是一个句子，这个句子由个单词组成：</p>
+<ol>
+<li><strong>词向量映射</strong>：首先，RNN 将句子中的每一个单词通过一个嵌入层（Word Embedding）映射成为一个向量得到一个向量序列：。</li>
+<li><strong>编码器隐状态更新</strong>：在时间步 ， Encoder RNN 的内部计算公式为：</li>
+</ol>
+<p>这里， 是上一个时间步的隐状态，它像一个滚雪球一样，携带了从  到  的全部历史信息。 是 RNN 在时间步的输入单词经过映射得到的向量。<br>
+3. <strong>传递 context 向量</strong>：当 Encoder 读完最后一个词  时，它输出的最后一个隐状态  就成为了代表整句话语义的 context 向量：</p>
+<ol start="4">
+<li><strong>解码器生成序列</strong>：Decoder 接收到 context 后，将其作为初始隐状态 ，然后开始逐字预测：</li>
+</ol>
+<p>其中  是解码器上一步输出的单词， 是解码器当前的隐状态。</p>
+<h2>Seq2Seq 模型处理长文本序列时遇到了什么问题？有什么优缺点？</h2>
+<p>经典 Seq2Seq 看似完美，但在工程实践中却遇到了极大的挑战。它的致命缺点可以总结为一句话：成也 context，败也 context。</p>
+<p>打个比方：这就好比让你去读一本 500 页的长篇小说（输入长文本），读完之后不准你翻书，只允许你在脑子里提取出 100 个字 的故事大纲（固定长度的 context 向量）。然后，让你根据这 100 字的大纲，把整本书一字不漏地翻译成英文（解码器输出）。</p>
+<p>这显然是不可能的任务！</p>
+<p>在实际应用中，这种架构存在两个无法调和的矛盾：</p>
+<p>基于 RNN 的 Seq2Seq 模型中 <strong>Encoder 把所有信息都编码到了一个context向量中</strong>，便是这类模型的瓶颈。</p>
+<ol>
+<li><strong>信息量与表达能力的矛盾</strong>：单只固定维度的向量（比如维度是 512），其所能容纳的信息熵是极其有限的，很难包含所有文本序列的信息。强行将一段成百上千字的文本压缩进如此小的空间，必然会导致严重的信息丢失。</li>
+<li><strong>梯度消失与记忆遗忘</strong>：由于 RNN 是串行递归计算的，即使使用了 LSTM 或 GRU，在处理到第 500 个单词时，很难再包含1-499个单词中的所有信息了。这就是经典的<strong>长距离依赖问题</strong>（Long-range Dependency）。</li>
+</ol>
+<p>为了打破这个窒息的信息瓶颈，2014 年， Dzmitry Bahdanau 等人提出了一项开创性的技术——注意力机制（ Attention Mechanism）。</p>
+<h2>基于 RNN 的 Seq2Seq 模型如何结合 Attention 来改善模型效果？</h2>
+<p>既然问题出在“<strong>试图用一个固定向量代表整句话</strong>”上，那我们索性不再强行压缩！</p>
+<p>Attention 的核心思想非常朴素：</p>
+<ol>
+<li>Encoder 在处理输入时，把所有时间步的隐状态  全部保留并发送给 Decoder ，而不仅仅是最后一个隐状态 。</li>
+<li>当 Decoder 在产生第  个输出单词时，它会动态地去计算当前输出状态与输入端所有隐状态的关联度（即注意力分配分数）。</li>
+<li>接着，根据这些分数对所有隐状态进行加权求和，融合成一个专属于当前时间步的动态 context 向量 。</li>
+</ol>
+<p>Attention 机制与经典的 Seq2Seq 模型主要有两点不同：</p>
+<ul>
+<li>
+<p>首先，编码器会把更多的数据传递给解码器。编码器把所有时间步的 hidden state（隐藏层状态）传递给解码器，而不是只传递最后一个 hidden state（隐藏层状态）</p>
+</li>
+<li>
+<p>注意力模型的解码器在产生输出之前，做了一个额外的 Attention 处理：</p>
+</li>
+</ul>
+<div class="hint-container warning">
+<p class="hint-container-title">注意</p>
+<p>今天我们不关注 Attention 内部实现的细节，只是简单了解大致的作用，以及其与 Seq2Seq 的区别。</p>
+</div>
+<p><video src="/videos/Mechanics_of_Seq2Seq_Models_With_Attention.mp4" controls width="100%"></video></p>
+<ol>
+<li>由于编码器中每个 hidden state（隐藏层状态）都对应到输入句子中一个单词，那么<strong>解码器要查看所有接收到的编码器的 hidden state</strong>（隐藏层状态）。</li>
+<li>给每个 hidden state（隐藏层状态）计算出一个分数（我们先忽略这个分数的计算过程）。</li>
+<li>所有 hidden state（隐藏层状态）的分数经过softmax进行归一化。</li>
+<li>将每个 hidden state（隐藏层状态）乘以所对应的分数，从而能够让高分对应的 hidden state（隐藏层状态）会被放大，而低分对应的 hidden state（隐藏层状态）会被缩小。</li>
+<li>将所有hidden state根据对应分数进行加权求和，得到对应时间步的context向量。</li>
+</ol>
+<div class="hint-container info">
+<p class="hint-container-title">总结</p>
+<p>所以，Attention 可以简单理解为：一种有效的加权求和技术，其艺术在于如何获得权重。需要注意的是：注意力模型不是无意识地把输出的第一个单词对应到输入的第一个单词，它是在训练阶段学习到如何对两种语言的单词进行对应。</p>
+</div>
+<h2>参考</h2>
+<p>[1] <a href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-Seq2Seq-models-with-attention/" target="_blank" rel="noopener noreferrer">Visualizing A Neural Machine Translation Model (Mechanics of Seq2Seq Models With Attention)</a><br>
+[2] <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Attention Is All You Need</a></p>
 ]]></content:encoded>
     </item>
   </channel>
