@@ -1,0 +1,103 @@
+name: Setup NotionNext Codebase
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - refactor-blog
+    paths:
+      - '.github/workflows/setup-notionnext.yml'
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 🚀 Checkout Current Repo
+        uses: actions/checkout@v4
+        with:
+          ref: refactor-blog
+          fetch-depth: 0
+
+      - name: 📥 Clone NotionNext Upstream
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 克隆官方 NotionNext 最新代码到临时目录
+          git clone --depth=1 https://github.com/notionnext-org/NotionNext.git /tmp/notionnext
+          
+          # 关键：彻底删除克隆仓库的 .git，绝不能覆盖或污染当前仓库的版本库！
+          rm -rf /tmp/notionnext/.git
+          
+          # 清除当前的 VuePress 文件（保留 .git 版本库）
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+          
+          # 拷贝完整的 NotionNext 项目源码到当前仓库根目录
+          cp -r /tmp/notionnext/. .
+          
+          # 清理可能带入的 modules 缓存
+          rm -rf .git/modules
+
+      - name: 🔧 Configure Production GitHub Pages Deploy Workflow
+        run: |
+          # 清空上游原有的 workflows，写入专属 GitHub Pages 自动化部署流程
+          rm -rf .github/workflows/*
+          cat << 'EOF' > .github/workflows/deploy.yml
+name: Deploy NotionNext to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+      - refactor-blog
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *' # 每 6 小时自动从 Notion 拉取更新并重新发布
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - name: 🚀 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🧱 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: 📦 Install Dependencies
+        run: yarn install --frozen-lockfile || yarn install
+
+      - name: 🔧 Build and Export Static Site
+        run: |
+          yarn export
+          # 创建 .nojekyll 防止 GitHub Pages 忽略 _next 目录资源
+          touch out/.nojekyll
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+          NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID }}
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: out
+          branch: gh-pages
+          clean: true
+EOF
+
+      - name: 🚀 Commit and Push NotionNext Code
+        run: |
+          # 移除本初始化工作流文件，避免后续冲突
+          rm -f .github/workflows/setup-notionnext.yml
+          
+          git add -A
+          git commit -m "chore: migrate blog to NotionNext for GitHub Pages"
+          git push origin refactor-blog
